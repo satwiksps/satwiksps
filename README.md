@@ -46,7 +46,7 @@
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Bar%20Chart.webp" alt="Bar Chart" width="25" height="25" /> Github Stats
 | 🔥 Streak | 📊 Stats |
 | --- | --- |
-| <img src="https://nirzak-streak-stats.vercel.app?user=satwiksps&theme=blood-dark">  | <img src="https://awesome-github-stats.azurewebsites.net/user-stats/satwiksps?cardType=octocat&theme=cobalt&preferLogin=false" width="100%"> |
+| <img src="https://nirzak-streak-stats.vercel.app?user=satwiksps&theme=dark">  | <img src="https://awesome-github-stats.azurewebsites.net/user-stats/satwiksps?cardType=octocat&theme=dark&preferLogin=false" width="100%"> |
 
 
 
