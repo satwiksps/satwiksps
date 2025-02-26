@@ -1,7 +1,7 @@
 
 
 # <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Symbols/Dizzy.webp" alt="Dizzy" width="25" height="25" /> About Me:
-🔭 I’m passionate about **Quantum Computing**, **Machine Learning**, and **Cybersecurity**. <br>
+🔭 I’m passionate about **Quantum Computing** and **Machine Learning**. <br>
 🌱 Currently exploring the intersection of **data science** and **quantum technologies**.  
 🚀 Aspiring to create innovative solutions that serve humanity.  
 💻 Let's collaborate on projects that push the boundaries of technology! 
