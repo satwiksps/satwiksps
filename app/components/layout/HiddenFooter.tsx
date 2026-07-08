@@ -2,14 +2,14 @@ import RotatingText from "../ui/RotatingText";
 
 export default function HiddenFooter() {
   const texts2 = [
-    "Into you hands",
-    "will be placed",
-    "the exact results",
-    "of your own thoughts;",
-    "you will receive",
-    "that which you earn",
-    "no less",
-    "no more.",
+    "Culture eats strategy",
+    "for breakfast;",
+    "true innovation happens",
+    "at the intersection",
+    "of diverse minds",
+    "working together",
+    "towards a shared",
+    "and unified vision."
   ];
   return (
     <div className="md:hidden">

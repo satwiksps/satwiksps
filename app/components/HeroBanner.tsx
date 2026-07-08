@@ -13,7 +13,7 @@ export default function HeroBanner() {
     "
       />
       <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text2 text-2xl font-semibold">
-        <Magnet padding={30} magnetStrength={5} className="hover:text-zinc-600 cursor-pointer whitespace-nowrap"><a href="mailto:rhythmdoshi04@gmail.com?subject=Let's connect&body=Hi Rhythm,">Open for full-time <br /> & freelance work</a></Magnet>
+        <Magnet padding={30} magnetStrength={5} className="hover:text-zinc-600 cursor-pointer whitespace-nowrap"><a href="mailto:sahoospsatwik@gmail.com?subject=Let's connect&body=Hi Satwik,">Open for full-time <br /> & freelance work</a></Magnet>
       </div>
     </div>
   );

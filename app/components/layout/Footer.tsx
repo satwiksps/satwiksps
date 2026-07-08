@@ -2,20 +2,21 @@ import RotatingText from "../ui/RotatingText";
 
 export default function Footer() {
   const texts1 = [
-    "Seeking the right opportunity. Let's talk.",
-    "Open to work and excited to contribute.",
-    "Eager to bring value to the right team."
+    "Thriving in cross-functional teams.",
+    "Driven by collaborative problem-solving.",
+    "Fostering strong organizational culture.",
+    "Building systems, elevating teams."
   ];
 
   const texts2 = [
-    "Into you hands",
-    "will be placed",
-    "the exact results",
-    "of your own thoughts;",
-    "you will receive",
-    "that which you earn",
-    "no less",
-    "no more.",
+    "Culture eats strategy",
+    "for breakfast;",
+    "true innovation happens",
+    "at the intersection",
+    "of diverse minds",
+    "working together",
+    "towards a shared",
+    "and unified vision."
   ];
 
   return (

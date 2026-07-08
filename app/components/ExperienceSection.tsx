@@ -6,7 +6,7 @@ export default function ExperienceSection() {
       <div className="innerContainer h-full px-4 text-[15px]">
         <div className="flex flex-col gap-6 font1 tracking-tighter py-4 text1">
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+          <div className="flex flex-row gap-4 sm:gap-6 items-start">
             <div className="mt-1 flex-shrink-0">
               <Image src="/images/google.png" alt="Google Summer of Code Logo" width={40} height={40} className="rounded-md bg-white p-1" />
             </div>
@@ -22,9 +22,9 @@ export default function ExperienceSection() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+          <div className="flex flex-row gap-4 sm:gap-6 items-start">
             <div className="mt-1 flex-shrink-0">
-              <Image src="/images/IBM.png" alt="IBM Logo" width={40} height={40} className="rounded-md bg-white p-1" />
+              <Image src="/images/ibm.png" alt="IBM Logo" width={40} height={40} className="rounded-md bg-white p-1" />
             </div>
             <div>
               <h3 className="font-semibold text-lg text1">IBM</h3>
@@ -37,7 +37,7 @@ export default function ExperienceSection() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+          <div className="flex flex-row gap-4 sm:gap-6 items-start">
             <div className="mt-1 flex-shrink-0">
               <Image src="/images/amazon.png" alt="Amazon Logo" width={40} height={40} className="rounded-md bg-white p-1" />
             </div>

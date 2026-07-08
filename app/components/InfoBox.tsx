@@ -21,12 +21,12 @@ export default function InfoBox() {
               <Mail className="size-3.5" />
             </IconBox>
             <a
-              href="mailto:satwiksps@gmail.com?subject=Let's connect&body=Hi Satwik,"
+              href="mailto:sahoospsatwik@gmail.com?subject=Let's connect&body=Hi Satwik,"
               className="hover:underline"
             >
-              satwiksps@gmail.com
+              sahoospsatwik@gmail.com
             </a>
-            <CopyButton text="satwiksps@gmail.com" />
+            <CopyButton text="sahoospsatwik@gmail.com" />
           </div>
 
           <div className="flex items-center gap-2 group">
