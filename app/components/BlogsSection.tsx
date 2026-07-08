@@ -25,19 +25,19 @@ export default function BlogsSection() {
   const getTagStyle = (tag: string) => {
     switch (tag.toLowerCase()) {
       case "opensource":
-        return "text-emerald-600 dark:text-emerald-400";
+        return { color: "#10b981" }; // emerald-500
       case "github":
-        return "text-purple-600 dark:text-purple-400";
+        return { color: "#8b5cf6" }; // purple-500
       case "google":
-        return "text-blue-600 dark:text-blue-400";
+        return { color: "#3b82f6" }; // blue-500
       case "gsoc":
-        return "text-amber-600 dark:text-amber-500";
+        return { color: "#f59e0b" }; // amber-500
       case "python":
-        return "text-yellow-600 dark:text-yellow-500";
+        return { color: "#eab308" }; // yellow-500
       case "ai":
-        return "text-rose-600 dark:text-rose-400";
+        return { color: "#f43f5e" }; // rose-500
       default:
-        return "text-zinc-700 dark:text-zinc-300";
+        return { color: "var(--text1)" }; // fallback to main text color
     }
   };
 
@@ -75,8 +75,12 @@ export default function BlogsSection() {
                 
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {blog.tags.map(tag => (
-                    <span key={tag} className={`bg-zinc-100 dark:bg-zinc-800/60 rounded-md px-2.5 py-1 text-xs font-mono font-medium ${getTagStyle(tag)}`}>
-                      {tag}
+                    <span 
+                      key={tag} 
+                      className="bg2 border border-[var(--border)] rounded-full px-3 py-1 text-xs font-mono font-medium shadow-sm"
+                      style={getTagStyle(tag)}
+                    >
+                      #{tag}
                     </span>
                   ))}
                 </div>
