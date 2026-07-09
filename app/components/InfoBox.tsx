@@ -29,15 +29,6 @@ export default function InfoBox() {
             <CopyButton text="sahoospsatwik@gmail.com" />
           </div>
 
-          <div className="flex items-center gap-2 group">
-            <IconBox>
-              <Phone className="size-3.5" />
-            </IconBox>
-            <a href="tel:+91-7077910547" className="hover:underline">
-              +91-7077910547
-            </a>
-            <CopyButton text="+91-7077910547" />
-          </div>
 
           <div className="flex items-center gap-2">
             <IconBox>
@@ -81,8 +72,8 @@ export default function InfoBox() {
             <IconBox>
               <Globe className="size-3.5" />
             </IconBox>
-            <a href="https://github.com/satwiksps" target="_blank" rel="noopener noreferrer" className="hover:underline">
-              github.com/satwiksps
+            <a href="https://www.satwiksps.site" target="_blank" rel="noopener noreferrer" className="hover:underline">
+              satwiksps.site
             </a>
           </div>
         </div>

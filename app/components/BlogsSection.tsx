@@ -97,7 +97,7 @@ export default function BlogsSection() {
           </div>
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full border-b">
         <div className="innerContainer h-5 flex items-center justify-end px-4 py-3 pb-8">
           <h5 className="text-sm font2 tracking-tighter">
             <Link

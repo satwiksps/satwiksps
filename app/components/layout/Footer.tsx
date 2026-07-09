@@ -36,7 +36,6 @@ export default function Footer() {
           <a href="https://github.com/satwiksps" className="text-xl font2 text2 underline hover:!text-zinc-700 transition">Satwik Sai Prakash Sahoo</a>
           <a href="https://github.com/satwiksps" className="hover:!text-zinc-700 transition text-sm font1 tracking-tight text2">Github</a>
           <a href="https://www.linkedin.com/in/satwiksps/" className="hover:!text-zinc-700 transition text-sm font1 tracking-tight text2">Linkedin</a>
-          <a href="tel:+91-7077910547" className="text-sm font1 tracking-tight text2 hover:!text-zinc-700 transition">+91-7077910547</a>
         </div>
 
       </div>
