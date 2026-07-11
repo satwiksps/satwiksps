@@ -11,6 +11,7 @@ import EducationSection from "./components/EducationSetion";
 import BlogsSection from "./components/BlogsSection";
 import PublicationsSection from "./components/PublicationsSection";
 import AccomplishmentsSection from "./components/AccomplishmentsSection";
+import OpenSourceSection from "./components/OpenSourceSection";
 import Footer from "./components/layout/Footer";
 import ScrollToHash from "./components/ScrollToHash";
 import HiddenFooter from "./components/layout/HiddenFooter";
@@ -68,6 +69,21 @@ export default function Home() {
 
       <div id="projects" className="scroll-mt-20">
         <ProjectsSection />
+      </div>
+
+      <StripedBox />
+
+      <div id="opensource" className="scroll-mt-20">
+        <Heading name="Open Source Contributions" />
+        <div className="w-full border-b">
+          <div className="innerContainer h-fit py-4 flex items-center justify-start px-4 font1 tracking-tighter text2 text-sm">
+            <h3>Some of my impactful contributions</h3>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full border-b">
+        <OpenSourceSection />
       </div>
 
       <StripedBox />

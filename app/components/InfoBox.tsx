@@ -57,7 +57,7 @@ export default function InfoBox() {
             <IconBox>
               <FileText className="size-3.5" />
             </IconBox>
-            <a href="#" className="hover:underline">
+            <a href="https://resumelink.co/satwiksps" target="_blank" rel="noopener noreferrer" className="hover:underline">
               Resume
             </a>
           </div>
