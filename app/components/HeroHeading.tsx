@@ -23,13 +23,22 @@ export default function Heroheading() {
             
             <div className="relative w-full h-full rounded-2xl overflow-hidden [perspective:1000px]">
               
-                <Image
-                  src="/images/profile_photo_v2.jpeg"
-                  alt="Portrait of Satwik Sai Prakash Sahoo"
-                  fill
-                  className="object-cover absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-105"
-                  priority={true}
-                />
+                <>
+                  <Image
+                    src="/images/profile_photo_v2.jpeg"
+                    alt="Portrait of Satwik Sai Prakash Sahoo"
+                    fill
+                    className="object-cover absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-105 dark:hidden"
+                    priority={true}
+                  />
+                  <Image
+                    src="/images/profile_photo_dark.png"
+                    alt="Portrait of Satwik Sai Prakash Sahoo"
+                    fill
+                    className="object-cover absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-105 hidden dark:block"
+                    priority={true}
+                  />
+                </>
 
             </div>
 

@@ -4,8 +4,8 @@ import type { Point, Stick, MouseState, RGB } from "../types/Themetoggle.types";
 
 const ThemeToggle = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [isDark, setIsDark] = useState(false);
-  const isDarkRef = useRef(false);
+  const [isDark, setIsDark] = useState(true);
+  const isDarkRef = useRef(true);
   const points = useRef<Point[]>([]);
   const sticks = useRef<Stick[]>([]);
   const mouse = useRef<MouseState>({ x: 0, y: 0, down: false, target: null});
