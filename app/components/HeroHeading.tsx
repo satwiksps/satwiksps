@@ -28,14 +28,16 @@ export default function Heroheading() {
                     src="/images/profile_photo_v2.jpeg"
                     alt="Portrait of Satwik Sai Prakash Sahoo"
                     fill
-                    className="object-cover absolute inset-0 transition-all duration-500 ease-out group-hover:scale-105 opacity-100 dark:opacity-0"
+                    className="object-cover absolute inset-0 transition-opacity duration-500 ease-out group-hover:scale-105"
+                    style={{ opacity: 'var(--profile-light-opacity)' }}
                     priority={true}
                   />
                   <Image
                     src="/images/profile_photo_dark.png"
                     alt="Portrait of Satwik Sai Prakash Sahoo"
                     fill
-                    className="object-cover absolute inset-0 transition-all duration-500 ease-out group-hover:scale-105 opacity-0 dark:opacity-100"
+                    className="object-cover absolute inset-0 transition-opacity duration-500 ease-out group-hover:scale-105"
+                    style={{ opacity: 'var(--profile-dark-opacity)' }}
                     priority={true}
                   />
                 </>
