@@ -44,7 +44,7 @@ export default function SocialLinks() {
             <Image src="/images/cf.png" alt="Codeforces Profile" width={24} height={24} className="rounded-md bg-white p-[2px]" />
             <div className="flex flex-col">
               <h3>Codeforces</h3>
-              <p className="text-xs font-medium bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-emerald-400 dark:to-teal-400 bg-clip-text text-transparent">Pupil, 1362</p>
+              <p className="text-xs font-medium bg-gradient-to-r from-cyan-500 to-cyan-400 dark:from-cyan-400 dark:to-cyan-300 bg-clip-text text-transparent">Specialist, 1424</p>
             </div>
           </div>
           <ArrowUpRight className="w-4 h-4 text-zinc-600 dark:text-zinc-400 group-hover:rotate-45 transition ease-in-out" />
