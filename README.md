@@ -1,7 +1,7 @@
 ▸ Currently software Developer under [Google Summer of Code 2026](https://summerofcode.withgoogle.com/) for NumFOCUS.<br/>
 ▸ During [IBM QAMP](https://www.credly.com/badges/64aed70f-a9ca-48b8-ae02-53a3a466b0c6) I built [QuDET](https://github.com/satwiksps/qudet-dev), a Python framework consolidating ML pipelines into reusable modules for quantum era.<br/>
 ▸ Mentee at [Amazon ML Summer School](https://drive.google.com/file/d/1VwqyTUeFrBndSyhoS-gsJLoQIIWbwXV5/view), selected among the top 3,000 out of 134,000+ applicants.<br/>
-▸ Building [Mobius](https://github.com/satwiksps/mobius), AI desktop automation via IDEs featuring a visual builder, native UI extraction with localized Python execution engine.<br/>
+▸ Building [Mobius](https://github.com/satwiksps/mobius), AI desktop automation via IDEs featuring a visual builder, native UI extraction with localized Python engine.<br/>
 ▸ Created [Tracelet](https://github.com/satwiksps/tracelet), IDE extension bridging cloud LLM observability for seamless AI workflow debugging and prompt analysis.<br/>
 ▸ Published *Hybrid Quantum-MambaVision: State Space Model for Wafer Defect Detection* @ PAKDD '26, Hong Kong | [Springer](https://link.springer.com/chapter/10.1007/978-981-92-2014-4_38).<br/>
 ▸ Built an award-winning [Quantum MLOps Pipeline](https://github.com/satwiksps/quantum-mlops-pipeline) at a national-level IIIT Nagpur hackathon.<br/>
