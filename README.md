@@ -3,7 +3,7 @@
 ▸ Mentee at [Amazon ML Summer School](https://drive.google.com/file/d/1VwqyTUeFrBndSyhoS-gsJLoQIIWbwXV5/view), selected among the top 3,000 out of 134,000+ applicants.<br/>
 ▸ Building [Mobius](https://github.com/satwiksps/mobius), AI desktop automation via IDEs featuring a visual builder, native UI extraction with localized Python execution engine.<br/>
 ▸ Created [Tracelet](https://github.com/satwiksps/tracelet), IDE extension bridging cloud LLM observability for seamless AI workflow debugging and prompt analysis.<br/>
-▸ Published *Hybrid Quantum-MambaVision: State Space Model for Wafer Defect Detection* @ PAKDD 2026, Hong Kong | [Springer LNCS](https://link.springer.com/chapter/10.1007/978-981-92-2014-4_38).<br/>
+▸ Published *Hybrid Quantum-MambaVision: State Space Model for Wafer Defect Detection* @ PAKDD '26, Hong Kong | [Springer](https://link.springer.com/chapter/10.1007/978-981-92-2014-4_38).<br/>
 ▸ Built an award-winning [Quantum MLOps Pipeline](https://github.com/satwiksps/quantum-mlops-pipeline) at a national-level IIIT Nagpur hackathon.<br/>
 ▸ **LeetCode:** [Knight](https://leetcode.com/satwiksps) (Max 1876) and **Codeforces:** [Specialist](https://codeforces.com/profile/satwiksps) (Max 1424). <br/>
 ▸ I occasionally write about tech on [Dev.to](https://dev.to/satwiksps).
