@@ -1,6 +1,6 @@
 I engineer scalable software applications, high-performance machine learning models and automated deployment pipelines.
 
-▸ Currently software developer under [Google Summer of Code 2026](https://summerofcode.withgoogle.com/) for NumFOCUS at **[sbi](https://github.com/sbi-dev/sbi)**.<br/>
+▸ Currently software developer under [Google Summer of Code 2026](https://summerofcode.withgoogle.com/programs/2026/projects/P5QOhl9F) for NumFOCUS at **[sbi](https://github.com/sbi-dev/sbi/pulls?q=is%3Apr+is%3Amerged+author%3Asatwiksps+)**.<br/>
 ▸ During [IBM QAMP](https://www.credly.com/badges/64aed70f-a9ca-48b8-ae02-53a3a466b0c6) I built [QuDET](https://github.com/satwiksps/qudet-dev), a Python framework consolidating ML pipelines into reusable modules for quantum era.<br/>
 ▸ Mentee at [Amazon ML Summer School](https://drive.google.com/file/d/1VwqyTUeFrBndSyhoS-gsJLoQIIWbwXV5/view), selected among the top 3,000 out of 134,000+ applicants.<br/>
 ▸ Building [Mobius](https://github.com/satwiksps/mobius), AI desktop automation via IDEs featuring a visual builder, native UI extraction with localized Python engine.<br/>
