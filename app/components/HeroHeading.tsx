@@ -17,7 +17,7 @@ export default function Heroheading() {
         
         <div
           id="imageDiv"
-          className="h-full aspect-square bg1 border-r flex items-center justify-center group"
+          className="h-full aspect-square bg1 border-r flex items-center justify-center group p-1 sm:p-1.5"
         >
           <div className="relative size-[100%] rounded-2xl border p-[2px] sm:p-[3px] group-hover:p-1 transition-all duration-500 ease-out">
             
