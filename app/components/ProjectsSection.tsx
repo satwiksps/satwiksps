@@ -6,7 +6,10 @@ import Link from "next/link";
 import { projects } from "../data/projects";
 
 export default function ProjectsSection() {
-  const arr1 = projects.slice(0, 2);
+  const projectRows = Array.from(
+    { length: Math.ceil(projects.length / 2) },
+    (_, index) => projects.slice(index * 2, index * 2 + 2),
+  );
 
   return (
     <div>
@@ -20,20 +23,26 @@ export default function ProjectsSection() {
 
       <ProjectLines />
 
-      {/* large: 2 cols in Projects + 1 ProjectLines below */}
-      <div className="hidden sm:block w-full border-b h-fit">
-        <Projects projectData={arr1} />
+      <div className="hidden sm:block">
+        {projectRows.map((row, index) => (
+          <div key={row[0].slug}>
+            <div className="w-full border-b h-fit">
+              <Projects projectData={row} />
+            </div>
+            {index < projectRows.length - 1 && <ProjectLines />}
+          </div>
+        ))}
       </div>
 
-      {/* small: 2 single rows each with ProjectLines below */}
       <div className="sm:hidden">
-        <div className="w-full border-b h-fit">
-          <Projects projectData={[arr1[0]]} />
-        </div>
-        <ProjectLines />
-        <div className="w-full border-b h-fit">
-          <Projects projectData={[arr1[1]]} />
-        </div>
+        {projects.map((project, index) => (
+          <div key={project.slug}>
+            <div className="w-full border-b h-fit">
+              <Projects projectData={[project]} />
+            </div>
+            {index < projects.length - 1 && <ProjectLines />}
+          </div>
+        ))}
       </div>
 
       <ProjectLines />

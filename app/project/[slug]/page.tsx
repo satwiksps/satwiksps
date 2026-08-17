@@ -72,12 +72,12 @@ export default async function ProjectPage({
             {project.subheading}
           </h4>
 
-          <div className="w-full h-[30vh] md:h-[55vh] sm:h-[45vh] relative rounded-xl border overflow-hidden">
+          <div className="relative aspect-[2/1] w-full rounded-xl border overflow-hidden bg3">
             <Image
               src={project.image}
               alt={project.alt}
               fill
-              sizes="100vw"
+              sizes="(min-width: 768px) 736px, 90vw"
               className="object-cover"
             />
           </div>
