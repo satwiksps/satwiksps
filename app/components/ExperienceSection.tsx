@@ -1,59 +1,100 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+
+const experiences = [
+  {
+    company: "Google Summer of Code",
+    role: "Software Developer Intern at NumFOCUS",
+    period: "May 2026 – Sep 2026",
+    image: "/images/google.png",
+    link: {
+      label: "Work Product Link",
+      href: "https://summerofcode.withgoogle.com/programs/2026/projects/P5QOhl9F",
+    },
+    bullets: [
+      "Redesigned the Python model-building API with typed configurations and fail-fast validation, introducing typed builders and model-specific configurations across PyTorch inference trainers while reducing exposed configuration fields by 69%.",
+      "Collaborated with mentors through agile development, code reviews, and feature integration, troubleshooting 12+ tracked issues across memory usage, sampling reliability, input handling, automation, and ML infrastructure to deliver 23 merged contributions.",
+      "Expanded Python test automation, regression validation to 200+ checks, correcting flaky and ineffective tests across model configuration, training, and backward compatibility, while debugging device mismatches, data inconsistency, & inference memory bloat.",
+    ],
+  },
+  {
+    company: "IBM",
+    role: "Contributor at Qiskit Advocate Mentorship Program",
+    period: "October 2025 – January 2026",
+    image: "/images/ibm.png",
+    bullets: [
+      "Built QuDET, a Python framework that consolidates ML pipeline infrastructure into reusable, configurable modules, reducing per-pipeline setup overhead by 89% and standardizing deployment across teams.",
+      "Developed a pluggable data governance layer with AES-128 encryption, role-based access control, automated audit logging, and statistical drift detection, reducing governance-related infrastructure code by 87%.",
+    ],
+  },
+  {
+    company: "Amazon ML Summer School",
+    role: "Mentee",
+    period: "Aug 2025 – Sep 2025",
+    image: "/images/amazon.png",
+    link: {
+      label: "Certificate Link",
+      href: "https://drive.google.com/file/d/1VwqyTUeFrBndSyhoS-gsJLoQIIWbwXV5/view",
+    },
+    bullets: [
+      "Analysed algorithms and optimization techniques for large-scale recommendation and prediction systems through technical discussions with Amazon scientists, strengthening algorithmic problem-solving and technical communication skills.",
+    ],
+  },
+];
 
 export default function ExperienceSection() {
   return (
-    <>
-      <div className="innerContainer h-full px-4 text-[15px]">
-        <div className="flex flex-col gap-6 font1 tracking-tighter py-4 text1">
-          
-          <div className="flex flex-row gap-4 sm:gap-6 items-start">
-            <div className="mt-1 flex-shrink-0">
-              <Image src="/images/google.png" alt="Google Summer of Code Logo" width={40} height={40} className="rounded-md bg-white p-1" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text1">Google Summer of Code</h3>
-              <p className="text-sm font-medium text2">Software Developer at NumFOCUS</p>
-              <p className="text-xs text-zinc-500 italic mb-2">May 2026 – Present</p>
-              <ul className="list-disc pl-5 flex flex-col gap-2 marker:text-[var(--text2)] text-[var(--text2)]">
-                <li>Designed a zero-downtime migration strategy that intercepts legacy API calls and routes them to a new Builder backend with targeted FutureWarning deprecations, cutting irrelevant parameters by 70%.</li>
-                <li>Built a streaming-ready data preprocessing seam by decoupling z-score computation from model instantiation, reducing initialization memory complexity from O(N) to O(1), enabling out-of-core training for massive datasets.</li>
-                <li>Overhauled the CI pipeline with 30+ rewritten unit tests featuring rigorous tensor shape assertions and neural network wiring validation, ensuring stability across 60+ test runs per commit.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="flex flex-row gap-4 sm:gap-6 items-start">
-            <div className="mt-1 flex-shrink-0">
-              <Image src="/images/ibm.png" alt="IBM Logo" width={40} height={40} className="rounded-md bg-white p-1" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text1">IBM</h3>
-              <p className="text-sm font-medium text2">Contributor at Qiskit Advocate Mentorship Program</p>
-              <p className="text-xs text-zinc-500 italic mb-2">October 2025 – January 2026</p>
-              <ul className="list-disc pl-5 flex flex-col gap-2 marker:text-[var(--text2)] text-[var(--text2)]">
-                <li>Built QuDET, a Python framework that consolidates ML pipeline infrastructure into reusable, configurable modules, reducing per-pipeline setup overhead by 89% and standardizing deployment across teams.</li>
-                <li>Developed a pluggable data governance layer with AES-128 encryption, role-based access control, automated audit logging, and statistical drift detection, reducing governance-related infrastructure code by 87%.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="flex flex-row gap-4 sm:gap-6 items-start">
-            <div className="mt-1 flex-shrink-0">
-              <Image src="/images/amazon.png" alt="Amazon Logo" width={40} height={40} className="rounded-md bg-white p-1" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text1">Amazon</h3>
-              <p className="text-sm font-medium text2">Mentee at Machine Learning Summer School</p>
-              <p className="text-xs text-zinc-500 italic mb-2">August 2025 – Sept 2025</p>
-              <ul className="list-disc pl-5 flex flex-col gap-2 marker:text-[var(--text2)] text-[var(--text2)]">
-                <li>Selected among the top 3,000 candidates out of over 134,000+ applicants to receive a month-long mentorship from Amazon scientists on Machine Learning.</li>
-                <li>Gained specialized knowledge in modern AI technologies, including Generative AI, Large Language Models (LLMs), and Deep Neural Networks.</li>
-              </ul>
+    <div className="innerContainer px-5 font2 sm:px-8">
+      {experiences.map((experience) => (
+        <article
+          key={experience.company}
+          className="border-b py-6 last:border-b-0 sm:py-8"
+        >
+          <div className="flex items-start gap-3 sm:gap-4">
+            <Image
+              src={experience.image}
+              alt=""
+              width={42}
+              height={42}
+              className="shrink-0 rounded-xl border bg-white p-1.5"
+            />
+            <div className="min-w-0 flex-1">
+              <h3 className="text1 text-base font-semibold leading-snug tracking-tight sm:text-lg">
+                {experience.company}
+              </h3>
+              <p className="text2 mt-1 text-sm leading-relaxed">
+                {experience.role}
+              </p>
+              <div className="text2 mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs leading-relaxed">
+                <span>{experience.period}</span>
+                {experience.link && (
+                  <a
+                    href={experience.link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${experience.company}: ${experience.link.label} (opens in a new tab)`}
+                    className="group inline-flex min-h-8 items-center gap-1 font-medium text-[var(--accent)] underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+                  >
+                    {experience.link.label}
+                    <ArrowUpRight
+                      size={13}
+                      aria-hidden="true"
+                      className="motion-safe:transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+                    />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
-
-        </div>
-      </div>
-    </>
+          <ul className="text2 mt-4 list-disc space-y-3 pl-4 text-[15px] leading-[1.75] marker:text-[var(--accent)] sm:ml-[58px] sm:pl-4">
+            {experience.bullets.map((bullet) => (
+              <li key={bullet} className="pl-1">
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
   );
 }

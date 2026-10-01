@@ -1,170 +1,192 @@
 "use client";
 
-import { useState } from "react";
-import { 
-  Aperture, 
-  Brain, 
-  Globe, 
-  Cloud, 
-  BarChart, 
-  Database, 
-  Code, 
-  Package,
-  TerminalSquare
+import { useId, useState } from "react";
+import {
+  Boxes,
+  Cloud,
+  Code2,
+  Database,
+  Library,
+  Search,
+  Workflow,
+  Wrench,
+  X,
+  type LucideIcon,
 } from "lucide-react";
 
-type CategoryName = "All Skills" | "AI/ML/DL" | "Python Libs" | "Web" | "Cloud" | "Big Data" | "Databases" | "Languages";
+type CategoryName =
+  | "Languages"
+  | "Frameworks"
+  | "Tools"
+  | "Concepts"
+  | "Platforms"
+  | "Databases"
+  | "Libraries";
 
-const categories: { name: CategoryName; icon: any }[] = [
-  { name: "All Skills", icon: Aperture },
-  { name: "AI/ML/DL", icon: Brain },
-  { name: "Python Libs", icon: Package },
-  { name: "Web", icon: Globe },
-  { name: "Cloud", icon: Cloud },
-  { name: "Big Data", icon: BarChart },
-  { name: "Databases", icon: Database },
-  { name: "Languages", icon: Code },
-];
+type SkillGroup = {
+  name: CategoryName;
+  icon: LucideIcon;
+  skills: string[];
+};
 
-const skills = [
-  // AI/ML/DL
-  { name: "PyTorch", category: "AI/ML/DL", icon: Brain, color: "#EE4C2C" },
-  { name: "Transformers", category: "AI/ML/DL", icon: Brain, color: "#FFD21E" },
-  { name: "PEFT", category: "AI/ML/DL", icon: Brain, color: "#FFD21E" },
-  { name: "Bitsandbytes", category: "AI/ML/DL", icon: Brain, color: "#FFD21E" },
-  { name: "Diffusers", category: "AI/ML/DL", icon: Brain, color: "#FFD21E" },
-  { name: "Hugging Face Ecosystem", category: "AI/ML/DL", icon: Package, color: "#FFD21E" },
-  
-  // Python Libs
-  { name: "NLTK", category: "Python Libs", icon: Aperture, color: "#3776AB" },
-  { name: "Scapy", category: "Python Libs", icon: Aperture, color: "#3776AB" },
-  { name: "OpenCV", category: "Python Libs", icon: Aperture, color: "#5C3EE8" },
-  { name: "BeautifulSoup", category: "Python Libs", icon: Aperture, color: "#3776AB" },
-  { name: "Selenium", category: "Python Libs", icon: Aperture, color: "#43B02A" },
-  { name: "Pandas", category: "Python Libs", icon: Aperture, color: "#000000" },
-  { name: "Poetry", category: "Python Libs", icon: Package, color: "#59A5D8" },
-  { name: "Langchain", category: "Python Libs", icon: Brain, color: "#000000" },
-
-  // Web
-  { name: "FastAPI", category: "Web", icon: Database, color: "#009688" },
-  { name: "Flask", category: "Web", icon: Package, color: "#000000" },
-  { name: "Django", category: "Web", icon: Package, color: "#44B78B" },
-  { name: "React.js", category: "Web", icon: Code, color: "#61DAFB" },
-  { name: "Next.js", category: "Web", icon: Aperture, color: "#000000" },
-  { name: "Express", category: "Web", icon: Database, color: "#000000" },
-  { name: "Node.js", category: "Web", icon: Database, color: "#339933" },
-  { name: "Vue.js", category: "Web", icon: Code, color: "#4FC08D" },
-  { name: "Bootstrap", category: "Web", icon: Aperture, color: "#7952B3" },
-  { name: "Tailwind", category: "Web", icon: Brain, color: "#06B6D4" },
-  { name: "HTML", category: "Web", icon: Code, color: "#E34F26" },
-  { name: "CSS", category: "Web", icon: Code, color: "#1572B6" },
-
-  // Cloud
-  { name: "SQL", category: "Languages", icon: Database, color: "#CC292B" },
-  { name: "Azure", category: "Cloud", icon: Cloud, color: "#0078D4" },
-  { name: "Azure Machine Learning", category: "Cloud", icon: Cloud, color: "#0078D4" },
-  { name: "AWS", category: "Cloud", icon: Cloud, color: "#FF9900" },
-  { name: "AWS SageMaker", category: "Cloud", icon: Cloud, color: "#FF9900" },
-  { name: "Docker", category: "Cloud", icon: Package, color: "#2496ED" },
-  { name: "Kubernetes", category: "Cloud", icon: Package, color: "#326CE5" },
-  { name: "Cloudflare", category: "Cloud", icon: Cloud, color: "#F38020" },
-  { name: "E2E Cloud", category: "Cloud", icon: Cloud, color: "#0052CC" },
-
-  // Big Data
-  { name: "Databricks", category: "Big Data", icon: Aperture, color: "#FF3621" },
-  { name: "Azure Data Factory", category: "Big Data", icon: Cloud, color: "#0078D4" },
-  { name: "Apache Spark", category: "Big Data", icon: Aperture, color: "#E25A1C" },
-  { name: "Hadoop", category: "Big Data", icon: Aperture, color: "#FFF000" },
-  { name: "Kafka", category: "Big Data", icon: Aperture, color: "#000000" },
-
-  // Databases
-  { name: "MongoDB", category: "Databases", icon: Database, color: "#47A248" },
-  { name: "PostgreSQL", category: "Databases", icon: Database, color: "#4169E1" },
-  { name: "Firebase", category: "Databases", icon: Aperture, color: "#FFCA28" },
-  { name: "Redis", category: "Databases", icon: Aperture, color: "#DC382D" },
-  { name: "MySQL", category: "Databases", icon: Database, color: "#4479A1" },
-  { name: "Supabase", category: "Databases", icon: Aperture, color: "#3ECF8E" },
-  { name: "Pinecone", category: "Databases", icon: Aperture, color: "#000000" },
-  { name: "FAISS", category: "Databases", icon: Brain, color: "#1877F2" },
-  { name: "Qdrant", category: "Databases", icon: Aperture, color: "#E60067" },
-  { name: "ChromaDB", category: "Databases", icon: Aperture, color: "#F84525" },
-
-  // Languages
-  { name: "JavaScript", category: "Languages", icon: Code, color: "#D4B800" },
-  { name: "TypeScript", category: "Languages", icon: Code, color: "#3178C6" },
-  { name: "Python", category: "Languages", icon: TerminalSquare, color: "#3776AB" },
-  { name: "C/C++", category: "Languages", icon: Aperture, color: "#00599C" }
+const skillGroups: SkillGroup[] = [
+  {
+    name: "Languages",
+    icon: Code2,
+    skills: ["Python", "TypeScript", "Go (Golang)", "SQL", "JavaScript", "C/C++", "HTML", "CSS"],
+  },
+  {
+    name: "Frameworks",
+    icon: Boxes,
+    skills: [
+      "React.js", "FastAPI", "Next.js", "Vue.js", "PyTorch", "TensorFlow",
+      "LangChain", "Gradio", "Spark", "OpenAI SDK", "Flask", "Django",
+      "Express", "Bootstrap", "Tailwind",
+    ],
+  },
+  {
+    name: "Tools",
+    icon: Wrench,
+    skills: [
+      "Docker", "Kubernetes", "Helm", "Git", "GitHub Actions", "pytest",
+      "Terraform", "Ansible", "Prometheus", "Grafana", "Node.js", "Jest",
+      "Postman", "Poetry",
+    ],
+  },
+  {
+    name: "Concepts",
+    icon: Workflow,
+    skills: [
+      "Distributed Systems", "Cloud-Native", "Microservices", "RESTful APIs",
+      "CI/CD", "Automated Testing", "Performance Optimization", "Monitoring",
+      "Observability", "Telemetry", "Production Support", "Networking",
+      "Security Best Practices", "Infrastructure as Code", "Design Patterns",
+    ],
+  },
+  {
+    name: "Platforms",
+    icon: Cloud,
+    skills: [
+      "Microsoft Azure", "AWS (SageMaker, Bedrock, Step Functions, S3, EC2, Lambda)",
+      "Azure DevOps", "Linux", "Vertex AI", "Kafka", "Azure Machine Learning",
+      "Azure Data Factory", "Cloudflare", "E2E Cloud", "Databricks", "Hadoop",
+    ],
+  },
+  {
+    name: "Databases",
+    icon: Database,
+    skills: [
+      "PostgreSQL", "MySQL", "DynamoDB", "Elasticsearch", "SQLite", "MongoDB",
+      "Redis", "Pinecone", "Firebase", "Supabase", "FAISS", "Qdrant", "ChromaDB",
+    ],
+  },
+  {
+    name: "Libraries",
+    icon: Library,
+    skills: [
+      "Transformers", "PEFT", "Bitsandbytes", "Diffusers", "Hugging Face Ecosystem",
+      "NLTK", "Scapy", "OpenCV", "BeautifulSoup", "Selenium", "Pandas",
+    ],
+  },
 ];
 
 export default function StackBox() {
-  const [activeCategory, setActiveCategory] = useState<CategoryName>("All Skills");
-
-  const filteredSkills = activeCategory === "All Skills" 
-    ? skills 
-    : skills.filter(skill => skill.category === activeCategory);
+  const [activeCategory, setActiveCategory] = useState<CategoryName | "All">("All");
+  const [search, setSearch] = useState("");
+  const searchId = useId();
+  const resultsId = useId();
+  const query = search.trim().toLowerCase();
+  const visibleGroups = skillGroups
+    .filter((group) => activeCategory === "All" || group.name === activeCategory)
+    .map((group) => ({
+      ...group,
+      skills: group.skills.filter((skill) =>
+        `${group.name} ${skill}`.toLowerCase().includes(query),
+      ),
+    }))
+    .filter((group) => group.skills.length > 0);
+  const visibleCount = visibleGroups.reduce((count, group) => count + group.skills.length, 0);
 
   return (
-    <div className="innerContainer p-4 md:p-6 py-8">
-      {/* Categories / Filters */}
-      <div className="flex flex-wrap gap-2 mb-6 justify-center sm:justify-start">
-        {categories.map((cat) => {
-          const count = cat.name === "All Skills" 
-            ? skills.length 
-            : skills.filter(s => s.category === cat.name).length;
+    <div className="innerContainer px-5 py-6 sm:px-8 sm:py-8">
+      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text2 text-sm leading-relaxed">The tools behind the things I build.</p>
+        <div className="relative w-full sm:w-56">
+          <label className="sr-only" htmlFor={searchId}>Search skills</label>
+          <Search aria-hidden="true" size={15} className="text2 pointer-events-none absolute left-3 top-1/2 -translate-y-1/2" />
+          <input
+            id={searchId}
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Find a skill…"
+            aria-controls={resultsId}
+            className="bg1 text1 h-11 w-full rounded-xl border border-[var(--border)] pl-9 pr-11 text-base outline-none transition-colors placeholder:text-[var(--text2)] focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)] sm:text-sm [&::-webkit-search-cancel-button]:appearance-none"
+          />
+          {search && (
+            <button
+              type="button"
+              onClick={() => setSearch("")}
+              aria-label="Clear skill search"
+              className="text2 absolute inset-y-0 right-0 flex w-11 items-center justify-center rounded-r-xl transition-colors hover:text-[var(--text1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+            >
+              <X aria-hidden="true" size={15} />
+            </button>
+          )}
+        </div>
+      </div>
 
-          const isActive = activeCategory === cat.name;
-
+      <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter skills by category">
+        {(["All", ...skillGroups.map((group) => group.name)] as const).map((category) => {
+          const isActive = activeCategory === category;
           return (
             <button
-              key={cat.name}
-              onClick={() => setActiveCategory(cat.name)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border shadow-sm ${
-                isActive 
-                ? 'bg-[var(--foreground)] text-[var(--background)] border-[var(--foreground)]' 
-                : 'bg3 text2 hover:text1 hover:bg2 border-[var(--border)]'
+              key={category}
+              type="button"
+              onClick={() => setActiveCategory(category)}
+              aria-pressed={isActive}
+              aria-controls={resultsId}
+              className={`min-h-11 rounded-full border px-3.5 py-2 text-xs font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${
+                isActive
+                  ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
+                  : "text2 border-[var(--border)] bg-[var(--bg1)] hover:bg-[var(--bg2)] hover:text-[var(--text1)]"
               }`}
             >
-              <cat.icon size={14} strokeWidth={isActive ? 2.5 : 2} />
-              <span>{cat.name}</span>
-              <span className={`px-1.5 py-0.5 rounded-full text-[10px] flex items-center justify-center font-bold leading-none ml-0.5 ${
-                isActive 
-                ? 'bg-[var(--background)] text-[var(--foreground)] shadow-sm' 
-                : 'bg2 text2'
-              }`}>
-                {count}
-              </span>
+              {category}
             </button>
           );
         })}
       </div>
 
-      {/* Skills Grid */}
-      <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-        {filteredSkills.map((skill, index) => (
-          <div 
-            key={`${skill.name}-${index}`} 
-            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--border)] bg1 text1 text-xs font-medium shadow-sm hover:bg2 hover:-translate-y-0.5 transition-all duration-300 cursor-default"
-            style={{ 
-              ['--hover-color' as any]: skill.color === '#000000' ? 'currentColor' : skill.color 
-            }}
-          >
-            <skill.icon size={14} strokeWidth={2} style={{ color: skill.color === '#000000' ? 'currentColor' : skill.color }} />
-            <span 
-              className="tracking-tight transition-colors duration-300"
-              style={{ color: 'var(--text-color, inherit)' }}
-              onMouseEnter={(e) => {
-                if(skill.color !== '#000000') {
-                  e.currentTarget.style.color = skill.color;
-                }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'inherit';
-              }}
-            >
-              {skill.name}
-            </span>
-          </div>
+      <p className="sr-only" role="status">{visibleCount} skills in {visibleGroups.length} categories.</p>
+      <div id={resultsId} className="space-y-5">
+        {visibleGroups.map(({ name, icon: Icon, skills }) => (
+          <section key={name} aria-label={`${name} skills`} className="grid gap-3 border-b border-[var(--border)] pb-5 last:border-b-0 last:pb-0 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-5">
+            <div className="flex items-center gap-2 self-start sm:pt-1.5">
+              <Icon size={15} aria-hidden="true" className="shrink-0 text-[var(--accent)]" />
+              <h3 className="text1 text-sm font-medium">{name}</h3>
+            </div>
+            <ul className="flex min-w-0 flex-wrap gap-1.5">
+              {skills.map((skill) => (
+                <li key={skill} className="text1 max-w-full rounded-lg border border-[var(--border)] bg-[var(--bg1)] px-2.5 py-1.5 text-xs leading-relaxed transition-colors duration-200 hover:border-[var(--accent)] hover:bg-[var(--accent-soft)]">
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
+        {visibleCount === 0 && (
+          <div className="rounded-2xl border border-dashed border-[var(--border)] px-5 py-10 text-center">
+            <p className="text1 text-sm">No matching skills here.</p>
+            <button
+              type="button"
+              onClick={() => { setSearch(""); setActiveCategory("All"); }}
+              className="mt-3 min-h-11 rounded-lg px-3 text-sm text-[var(--accent)] underline decoration-[var(--border)] underline-offset-4 transition-colors hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+            >
+              Show all skills
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

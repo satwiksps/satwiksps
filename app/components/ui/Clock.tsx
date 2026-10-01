@@ -6,6 +6,7 @@ export default function TimeClock() {
     new Date().toLocaleTimeString("en-IN", {
       hour: "2-digit",
       minute: "2-digit",
+      timeZone: "Asia/Kolkata",
     })
   );
 
@@ -15,6 +16,7 @@ export default function TimeClock() {
         new Date().toLocaleTimeString("en-IN", {
           hour: "2-digit",
           minute: "2-digit",
+          timeZone: "Asia/Kolkata",
         })
       );
     }, 1000);
@@ -22,5 +24,5 @@ export default function TimeClock() {
     return () => clearInterval(interval);
   }, []);
 
-  return <span>{time}</span>;
+  return <span suppressHydrationWarning>{time} IST</span>;
 }

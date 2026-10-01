@@ -1,42 +1,29 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
-type TextProps = {
-  texts: string[];
-  align?: "left" | "center" | "right";
-};
+type TextProps = { texts: string[]; align?: "left" | "center" | "right" };
 
 export default function RotatingText({ texts, align = "left" }: TextProps) {
   const [index, setIndex] = useState(0);
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % texts.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const alignClass = {
-    left: "justify-start text-left",
-    center: "justify-center text-center",
-    right: "justify-end text-right",
-  }[align];
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const update = () => {
+      clearInterval(timer);
+      if (!motion.matches && texts.length > 1) timer = setInterval(() => setIndex(previous => (previous + 1) % texts.length), 3500);
+    };
+    update();
+    motion.addEventListener("change", update);
+    return () => { clearInterval(timer); motion.removeEventListener("change", update); };
+  }, [texts.length]);
 
   return (
-    <div className={`relative h-8 overflow-hidden text2 font-medium w-full ${alignClass}`}>
-      <div
-        className="transition-transform duration-700 ease-out"
-        style={{
-          transform: `translateY(-${index * 2}rem)`,
-        }}
-      >
-        {texts.map((text, i) => (
-          <div key={i} className={`h-8 flex items-center ${alignClass}`}>
-            {text}
-          </div>
-        ))}
-      </div>
+    <div className="grid text2 font-medium" style={{ textAlign: align }}>
+      <span className="sr-only">{texts.join(" · ")}</span>
+      {texts.map((text, position) => (
+        <span key={text} aria-hidden="true" className="col-start-1 row-start-1 self-center transition-opacity duration-500" style={{ opacity: position === index ? 1 : 0 }}>{text}</span>
+      ))}
     </div>
   );
 }

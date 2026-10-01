@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { notFound } from "next/navigation";
 import { blogs } from "@/app/data/blogs";
 import StripedBox from "@/app/components/StripedBox";
 import Link from "next/link";
@@ -23,7 +22,7 @@ export default async function BlogPage({
   const blog = blogs.find((b) => b.slug === slug);
 
   if (!blog) {
-    return <div className="p-10 text-center text2">Blog not found</div>;
+    return <main id="main-content" className="p-10 text-center text2">Blog not found</main>;
   }
 
   // 👉 Load MDX file
@@ -37,7 +36,7 @@ export default async function BlogPage({
   console.log("exists:", fs.existsSync(filePath));
 
   return (
-    <div>
+    <main id="main-content">
       <StripedBox />
 
       {/* Top bar */}
@@ -104,6 +103,6 @@ export default async function BlogPage({
       <StripedBox />
       <Footer />
       <HiddenFooter />
-    </div>
+    </main>
   );
 }
