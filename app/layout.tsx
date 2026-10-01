@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/layout/Navbar";
-import ThemeToggle from "./components/ThemeToggle";
-import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://satwiksps.xyz"),
@@ -55,8 +53,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: `try { document.documentElement.classList.toggle('dark', localStorage.getItem('portfolio-theme') !== 'light'); } catch {}` }} />
         <link
           rel="preload"
           href="/fonts/font2.woff2"
@@ -73,9 +72,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`font1 font2 antialiased`}>
-        <div className="sticky top-0 h-2 w-full bg1 z-50"></div>
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[var(--bg1)] focus:p-3">Skip to content</a>
         <Navbar />
-        <ThemeToggle />
         {children}
       </body>
     </html>

@@ -1,97 +1,54 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Terminal } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import ThemeToggle from "../ThemeToggle";
+
+const links = [
+  { href: "/#experience", label: "Experience" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#opensource", label: "Open source" },
+  { href: "/#blogs", label: "Blog" },
+];
+const mobileLinks = [...links, { href: "/#skills", label: "Skills" }, { href: "/#publications", label: "Publications" }, { href: "/#accomplishments", label: "Achievements" }];
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [hash, setHash] = useState("");
-  const [isDark, setIsDark] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const checkDark = () => {
-      setIsDark(document.documentElement.classList.contains("dark"));
+    if (!menuOpen) return;
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setMenuOpen(false); menuButton.current?.focus(); }
     };
-
-    checkDark();
-
-    // optional: watch for changes if you toggle theme dynamically
-    const observer = new MutationObserver(checkDark);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-    const update = () => setHash(window.location.hash);
-
-    update(); // initial
-
-    window.addEventListener("hashchange", update);
-    window.addEventListener("popstate", update);
-
-    return () => {
-      window.removeEventListener("hashchange", update);
-      window.removeEventListener("popstate", update);
-      observer.disconnect();
-    };
-  }, []);
-
-  const isHome = pathname === "/" && hash !== "#projects" && hash !== "#blogs";
-  const isProjects = pathname.startsWith("/project") || hash === "#projects";
-  const isBlogs = hash === "#blogs";
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
+  }, [menuOpen]);
 
   return (
-    <nav className="sticky top-2 z-50 h-12 w-full flex justify-center items-center bg1 border-y">
-      <div className="h-full max-w-3xl w-[95%] md:full flex justify-center items-center px-4 sm:px-8 border-x">
-        <div className="flex gap-4 sm:gap-8 overflow-x-auto whitespace-nowrap scrollbar-hide w-full justify-center">
-          <Link
-            href="/"
-            onClick={() => setHash("")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${isHome ? "text1" : "text2 hover:text1"}`}>
-              Home
-            </h5>
-          </Link>
-
-          <Link
-            href="/#experience"
-            onClick={() => setHash("#experience")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${hash === "#experience" ? "text1" : "text2 hover:text1"}`}>
-              Experience
-            </h5>
-          </Link>
-
-          <Link
-            href="/#projects"
-            onClick={() => setHash("#projects")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${isProjects ? "text1" : "text2 hover:text1"}`}>
-              Projects
-            </h5>
-          </Link>
-
-          <Link
-            href="/#publications"
-            onClick={() => setHash("#publications")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${hash === "#publications" ? "text1" : "text2 hover:text1"}`}>
-              Publications
-            </h5>
-          </Link>
-
-          <Link
-            href="/#blogs"
-            onClick={() => setHash("#blogs")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${isBlogs ? "text1" : "text2 hover:text1"}`}>
-              Blog
-            </h5>
-          </Link>
+    <header className="site-nav sticky top-0 z-50 border-b">
+      <nav aria-label="Main navigation" className="innerContainer px-4 sm:px-6">
+        <div className="flex min-h-18 items-center justify-between gap-3">
+          <Link href="/" aria-label="Satwik — home" onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center gap-1 font2 text-xl tracking-tight text1">satwik<span className="text-[var(--accent)]">.</span></Link>
+          <div className="hidden items-center gap-5 sm:flex">
+            {links.map(link => <Link key={link.href} href={link.href} className={"nav-link inline-flex min-h-11 items-center text-sm " + (pathname.startsWith("/project") && link.label === "Projects" ? "text1" : "text2")}>{link.label}</Link>)}
+          </div>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button ref={menuButton} type="button" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen(!menuOpen)} className="flex size-11 items-center justify-center rounded-full border text1 transition-colors hover:bg-[var(--bg2)] sm:hidden">
+              {menuOpen ? <X size={19} aria-hidden="true" /> : <Menu size={19} aria-hidden="true" />}
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+        <div id="mobile-navigation" hidden={!menuOpen} className="border-t pb-4 pt-2 sm:hidden">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+            {mobileLinks.map(link => <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="flex min-h-12 items-center justify-between gap-2 rounded-lg px-2 text-sm text2 hover:bg-[var(--bg2)] hover:text-[var(--accent)]">{link.label}<ArrowUpRight size={14} aria-hidden="true" /></Link>)}
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 }

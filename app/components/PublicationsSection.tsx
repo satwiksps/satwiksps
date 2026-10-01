@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import paperImage from "../../public/images/paper_pakdd_1.jpg";
 
 export default function PublicationsSection() {
   return (
@@ -9,9 +10,10 @@ export default function PublicationsSection() {
           
           <Link href="https://arxiv.org/abs/2605.16404" target="_blank" rel="noopener noreferrer" className="block w-full">
             <div className="w-full border mb-4 rounded-md overflow-hidden">
-              <img 
-                src="/images/paper_pakdd_1.jpg" 
+              <Image
+                src={paperImage}
                 alt="Hybrid Quantum-MambaVision Architecture" 
+                sizes="(min-width: 768px) 736px, 90vw"
                 className="w-full h-auto"
               />
             </div>

@@ -1,6 +1,4 @@
 import {
-  Mail,
-  Phone,
   MapPin,
   Clock,
   Mars,
@@ -14,15 +12,12 @@ import TimeClock from "./ui/Clock";
 export default function InfoBox() {
   return (
     <>
-      <div className="innerContainer min-h-[25vh] p-4 py-6 font1 tracking-tighter grid grid-cols-1 sm:grid-cols-2">
+      <div className="innerContainer px-5 py-6 sm:px-8 font2 grid grid-cols-1 gap-6 sm:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] text-sm">
         <div className="flex flex-col gap-2 justify-center">
-          <div className="flex items-center gap-2 group">
-            <IconBox>
-              <Mail className="size-3.5" />
-            </IconBox>
+          <div className="flex min-w-0 items-center gap-2 group">
             <a
               href="mailto:sahoospsatwik@gmail.com?subject=Let's connect&body=Hi Satwik,"
-              className="hover:underline"
+              className="min-w-0 break-all hover:underline"
             >
               sahoospsatwik@gmail.com
             </a>
@@ -34,12 +29,9 @@ export default function InfoBox() {
             <IconBox>
               <MapPin className="size-3.5" />
             </IconBox>
-            <a
-              href="#"
-              className="hover:underline"
-            >
+            <span>
               Bhubaneswar, India
-            </a>
+            </span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -52,7 +44,7 @@ export default function InfoBox() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 justify-center md:items-start mt-4 md:mt-0">
+        <div className="flex flex-col gap-2 justify-center sm:items-start">
           <div className="flex items-center gap-2 relative">
             <IconBox>
               <FileText className="size-3.5" />

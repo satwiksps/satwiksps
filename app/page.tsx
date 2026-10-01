@@ -19,7 +19,7 @@ import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg1 dark:bg-black">
+    <main id="main-content" className="min-h-screen bg1">
       <Suspense fallback={null}>
       <ScrollToHash />
       </Suspense>
@@ -59,7 +59,7 @@ export default function Home() {
 
       <StripedBox />
 
-      <Heading name="Stack" />
+      <div id="skills" className="scroll-mt-20"><Heading name="Skills" /></div>
 
       <div className="w-full border-b">
         <StackBox />
@@ -77,7 +77,7 @@ export default function Home() {
         <Heading name="Open Source Contributions" />
         <div className="w-full border-b">
           <div className="innerContainer h-fit py-4 flex items-center justify-start px-4 font1 tracking-tighter text2 text-sm">
-            <h3>Some of my impactful contributions</h3>
+            <h3>Selected work across containers, Linux, and machine learning.</h3>
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default function Home() {
       <StripedBox />
 
       <div id="accomplishments" className="scroll-mt-20">
-        <Heading name="Accomplishments" />
+        <Heading name="Achievements" />
       </div>
 
       <div className="w-full border-b">
