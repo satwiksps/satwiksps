@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ProjectLines from "./ProjectLines";
 import { ArrowUpRight, Calendar, Clock } from "lucide-react";
 
 export default function BlogsSection() {
@@ -21,6 +22,25 @@ export default function BlogsSection() {
     }
   ];
 
+  const getTagStyle = (tag: string) => {
+    switch (tag.toLowerCase()) {
+      case "opensource":
+        return { color: "#10b981" }; // emerald-500
+      case "github":
+        return { color: "#8b5cf6" }; // purple-500
+      case "google":
+        return { color: "#3b82f6" }; // blue-500
+      case "gsoc":
+        return { color: "#f59e0b" }; // amber-500
+      case "python":
+        return { color: "#eab308" }; // yellow-500
+      case "ai":
+        return { color: "#f43f5e" }; // rose-500
+      default:
+        return { color: "var(--text1)" }; // fallback to main text color
+    }
+  };
+
   return (
     <div className="w-full border-b">
       <div className="innerContainer">
@@ -33,7 +53,7 @@ export default function BlogsSection() {
                 rel="noopener noreferrer"
                 className="h-full flex flex-col"
               >
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text2 text-xs mb-4 font-mono">
+                <div className="flex items-center gap-3 text-zinc-500 text-sm mb-4 font-mono">
                   <div className="flex items-center gap-1.5">
                     <Calendar size={15} />
                     <span>{blog.date}</span>
@@ -44,20 +64,21 @@ export default function BlogsSection() {
                     <span>{blog.readTime}</span>
                   </div>
                 </div>
-                
+
                 <h2 className="text-xl md:text-2xl font-bold text1 mb-4 leading-snug group-hover:underline">
                   {blog.heading}
                 </h2>
-                
+
                 <p className="font-mono text-zinc-600 dark:text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
                   {blog.summary}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {blog.tags.map(tag => (
-                    <span 
-                      key={tag} 
-                      className="bg2 text-[var(--accent)] border border-[var(--border)] rounded-full px-3 py-1 text-xs font-mono font-medium"
+                    <span
+                      key={tag}
+                      className="bg2 border border-[var(--border)] rounded-full px-3 py-1 text-xs font-mono font-medium shadow-sm"
+                      style={getTagStyle(tag)}
                     >
                       #{tag}
                     </span>

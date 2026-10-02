@@ -1,28 +1,16 @@
-import {
-  ArrowUpRight,
-  Award,
-  Braces,
-  Code2,
-  GitPullRequest,
-  GraduationCap,
-  Trophy,
-} from "lucide-react";
-
 const achievements = [
   {
-    icon: Award,
     description: (
       <>
-        Selected for <strong>Amazon ML Summer School</strong> among top 3,000 of
+        Selected for <strong className="font-medium text1">Amazon ML Summer School</strong> among top 3,000 of
         134,000+ applicants through a rigorous coding assessment.
       </>
     ),
   },
   {
-    icon: GitPullRequest,
     description: (
       <>
-        Contributed <strong>85+ merged pull requests</strong> to major open-source
+        Contributed <strong className="font-medium text1">85+ merged pull requests</strong> to major open-source
         repositories on GitHub including Podman, Flatcar etc.
       </>
     ),
@@ -33,10 +21,9 @@ const achievements = [
     },
   },
   {
-    icon: Trophy,
     description: (
       <>
-        Secured <strong>2nd Place</strong> at TantraFiesta national-level hackathon
+        Secured <strong className="font-medium text1">2nd Place</strong> at TantraFiesta national-level hackathon
         organized by IIIT Nagpur in 2025.
       </>
     ),
@@ -47,10 +34,9 @@ const achievements = [
     },
   },
   {
-    icon: Code2,
     description: (
       <>
-        Achieved the <strong>LeetCode Knight</strong> title with a current rating of
+        Achieved the <strong className="font-medium text1">LeetCode Knight</strong> title with a current rating of
         1876, placing in the top 4.99% globally.
       </>
     ),
@@ -61,19 +47,17 @@ const achievements = [
     },
   },
   {
-    icon: GraduationCap,
     description: (
       <>
-        Received the <strong>OUTR Merit Scholarship</strong> for maintaining a
+        Received the <strong className="font-medium text1">OUTR Merit Scholarship</strong> for maintaining a
         position among the top 10% CGPA holders of my college.
       </>
     ),
   },
   {
-    icon: Braces,
     description: (
       <>
-        Attained the <strong>Codeforces Specialist</strong> rank with a maximum
+        Attained the <strong className="font-medium text1">Codeforces Specialist</strong> rank with a maximum
         rating of 1430.
       </>
     ),
@@ -87,37 +71,30 @@ const achievements = [
 
 export default function AccomplishmentsSection() {
   return (
-    <div className="innerContainer px-5 font2 sm:px-8">
-      <ul className="divide-y divide-[var(--border)] py-1">
-        {achievements.map(({ icon: Icon, description, link }, index) => (
-          <li key={index} className="flex items-start gap-3 py-5 sm:gap-4 sm:py-6">
-            <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)] sm:size-9">
-              <Icon size={17} strokeWidth={1.6} aria-hidden="true" />
-            </span>
-            <div className="min-w-0">
-              <p className="text2 text-[15px] leading-[1.75] [&_strong]:font-medium [&_strong]:text-[var(--text1)]">
-                {description}
-              </p>
+    <div className="innerContainer h-full px-4 text-[15px]">
+      <div className="flex flex-col gap-4 font1 tracking-tighter py-4 text1">
+        <ul className="list-disc pl-5 flex flex-col gap-4 md:gap-3 marker:text-[var(--text2)] text-[var(--text2)]">
+          {achievements.map(({ description, link }, index) => (
+            <li key={index}>
+              {description}
               {link && (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${link.name} (opens in a new tab)`}
-                  className="group mt-1 inline-flex min-h-9 items-center gap-1 text-xs font-medium text-[var(--accent)] underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-                >
-                  {link.label}
-                  <ArrowUpRight
-                    size={13}
-                    aria-hidden="true"
-                    className="motion-safe:transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
-                  />
-                </a>
+                <>
+                  {" | "}
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${link.name} (opens in a new tab)`}
+                    className="text2 underline underline-offset-2"
+                  >
+                    {link.label}
+                  </a>
+                </>
               )}
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

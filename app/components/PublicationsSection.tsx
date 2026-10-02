@@ -1,19 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import paperImage from "../../public/images/paper_pakdd_1.jpg";
 
 export default function PublicationsSection() {
   return (
     <>
       <div className="innerContainer h-full px-4 text-[15px]">
         <div className="flex flex-col gap-4 font1 tracking-tighter py-4 text1">
-          
+
           <Link href="https://arxiv.org/abs/2605.16404" target="_blank" rel="noopener noreferrer" className="block w-full">
             <div className="w-full border mb-4 rounded-md overflow-hidden">
-              <Image
-                src={paperImage}
-                alt="Hybrid Quantum-MambaVision Architecture" 
-                sizes="(min-width: 768px) 736px, 90vw"
+              <img
+                src="/images/paper_pakdd_1.jpg"
+                alt="Hybrid Quantum-MambaVision Architecture"
                 className="w-full h-auto"
               />
             </div>

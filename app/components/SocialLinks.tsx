@@ -37,14 +37,14 @@ export default function SocialLinks() {
           <ArrowUpRight className="w-4 h-4 text-zinc-600 dark:text-zinc-400 group-hover:rotate-45 transition ease-in-out" />
         </a>
       </div>
-      
+
       <div className="innerContainer border-t h-auto min-h-[4rem] grid grid-cols-1 md:grid-cols-2">
         <a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/profile/satwiksps" className="group hover-bg2 transition ease-in border-r flex items-center justify-between px-3 py-4 md:py-0 pl-4 border-b md:border-b-0">
           <div className="flex items-center gap-3">
             <Image src="/images/cf.png" alt="Codeforces Profile" width={24} height={24} className="rounded-md bg-white p-[2px]" />
             <div className="flex flex-col">
               <h3>Codeforces</h3>
-              <p className="text-xs font-medium text-[var(--accent)]">Specialist · max 1430</p>
+              <p className="text-xs font-medium bg-gradient-to-r from-cyan-500 to-cyan-400 dark:from-cyan-400 dark:to-cyan-300 bg-clip-text text-transparent">Specialist, max 1430</p>
             </div>
           </div>
           <ArrowUpRight className="w-4 h-4 text-zinc-600 dark:text-zinc-400 group-hover:rotate-45 transition ease-in-out" />
@@ -55,7 +55,7 @@ export default function SocialLinks() {
             <Image src="/images/leetcode.webp" alt="LeetCode Profile" width={24} height={24} className="rounded-md" />
             <div className="flex flex-col">
               <h3>LeetCode</h3>
-              <p className="text-xs font-medium text-[var(--accent)]">Knight · 1876 · top 4.99%</p>
+              <p className="text-xs font-medium bg-gradient-to-r from-amber-500 to-orange-500 dark:from-amber-400 dark:to-orange-400 bg-clip-text text-transparent">Knight, 1876 · top 4.99%</p>
             </div>
           </div>
           <ArrowUpRight className="w-4 h-4 text-zinc-600 dark:text-zinc-400 group-hover:rotate-45 transition ease-in-out" />

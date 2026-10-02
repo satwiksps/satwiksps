@@ -12,18 +12,15 @@ export default function CopyButton({text}: textProps) {
   return (
     <button
   aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
-  onClick={async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      setCopied(false);
-    }
+  onClick={() => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   }}
   className="
-    flex size-11 shrink-0 items-center justify-center rounded-lg hover:bg-[var(--bg2)]
+    opacity-0 translate-x-1
     transition-all duration-200
+    group-hover:opacity-100 group-hover:translate-x-0
     text2
   "
 >

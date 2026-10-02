@@ -1,22 +1,19 @@
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import Magnet from "./ui/Magnet";
 
 export default function HeroBanner() {
   return (
-    <div className="innerContainer hero-banner relative isolate overflow-hidden px-5 py-9 sm:px-8 sm:py-12">
-      <div className="hero-orbit" aria-hidden="true" />
-      <div className="relative max-w-lg hero-enter">
-        <a href="mailto:sahoospsatwik@gmail.com" className="availability inline-flex min-h-11 items-center gap-2.5 rounded-full border px-3 py-1 text-xs font-medium">
-          <span className="status-dot" aria-hidden="true" />
-          Open for full-time &amp; freelance work
-          <ArrowUpRight size={14} aria-hidden="true" />
-        </a>
-        <p className="mt-5 text-balance font2 text-[clamp(1.9rem,5vw,3rem)] leading-[1.15] tracking-tight text1">
-          Building useful things.<br />
-          <span className="text-[var(--accent)]">Out in the open.</span>
-        </p>
-        <a href="#opensource" className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm text2 transition-colors hover:text-[var(--accent)]">
-          Explore my contributions <ArrowDownRight size={16} aria-hidden="true" />
-        </a>
+    <div className="innerContainer relative">
+      <div
+        className="
+          h-[23vh] sm:h-[27vh] md:h-[30vh] w-full
+          flex items-center justify-center
+          bg-[radial-gradient(var(--bg2)_1px,transparent_0)]
+          [background-size:10px_10px]
+          bg-center
+        "
+      />
+      <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text2 text-2xl font-semibold">
+        <Magnet padding={30} magnetStrength={5} className="hover:text-zinc-600 cursor-pointer whitespace-nowrap"><a href="mailto:sahoospsatwik@gmail.com?subject=Let's connect&body=Hi Satwik,">Open for full-time <br /> & freelance work</a></Magnet>
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ export default function OpenSourceSection() {
       title: "Restored farm testing in GitHub Actions",
       label: "CI/CD",
       impact: "Re-enabled rootless farm tests after the CI migration, adding workflow filters, API socket setup, and portable home-directory handling.",
-      featured: true,
     },
     {
       org: "podman-container-tools/podman",
@@ -19,7 +18,6 @@ export default function OpenSourceSection() {
       title: "Fixed OpenAPI model collisions",
       label: "API tooling",
       impact: "Replaced deprecated Swagger aliases and disambiguated Go model names, resolving nine OpenAPI generation warnings.",
-      featured: true,
     },
     {
       org: "podman-container-tools/podman",
@@ -28,7 +26,6 @@ export default function OpenSourceSection() {
       title: "Stabilized cgroup integration tests",
       label: "testing",
       impact: "Fixed intermittent cgroups=split test failures with explicit systemd delegation so child cgroups receive the required controllers.",
-      featured: true,
     },
     {
       org: "flatcar/baselayout",
@@ -37,7 +34,6 @@ export default function OpenSourceSection() {
       title: "Fixed Flatcar network-file compatibility",
       label: "Linux",
       impact: "Restored four missing /etc network database paths for static binaries and Kubernetes hostPath consumers, preserving custom files.",
-      featured: true,
     },
     {
       org: "sbi-dev/sbi",
@@ -100,9 +96,9 @@ export default function OpenSourceSection() {
   const getLabelStyle = (label: string) => {
     switch (label) {
       case "bug":
-        return "bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20";
+        return "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20";
       case "feature":
-        return "bg-emerald-500/10 text-emerald-800 dark:text-emerald-400 border border-emerald-500/20";
+        return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20";
       case "refactor":
         return "bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20";
       default:
@@ -112,55 +108,52 @@ export default function OpenSourceSection() {
 
   return (
     <div className="w-full">
-      <div className="innerContainer grid grid-cols-1 gap-3 p-4 sm:p-5 md:grid-cols-2">
-        {prs.map((pr) => (
+      <div className="innerContainer grid grid-cols-1 md:grid-cols-3">
+        {prs.map((pr, idx) => (
           <Link
             href={pr.link}
             target="_blank"
             rel="noopener noreferrer"
-            key={pr.link}
-            className={`group flex min-w-0 flex-col rounded-xl border p-4 transition-colors duration-200 hover:border-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] sm:p-5 ${
-              pr.featured
-                ? "border-emerald-600/20 bg-[var(--accent-soft)]"
-                : "bg1 hover-bg2"
-            }`}
+            key={idx}
+            className={`group flex flex-col justify-between p-4 sm:p-5 min-h-[6.5rem] hover-bg2 transition ease-in border-b md:border-r [&:nth-child(3n)]:md:border-r-0 [&:nth-last-child(-n+3)]:md:border-b-0 last:border-b-0`}
           >
-            <div className="mb-4 flex items-start justify-between gap-3">
-              <div className="flex min-w-0 items-start gap-2 font-mono text-xs leading-5 text2">
-                <GitPullRequest size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-[var(--accent)]" />
-                <span className="[overflow-wrap:anywhere]">{pr.org}</span>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between gap-2 mb-1">
+                <div className="flex items-center gap-1.5 text-xs font-mono text2 min-w-0">
+                  <GitPullRequest size={14} className="shrink-0 text-zinc-400" />
+                  <span className="truncate">{pr.org}</span>
+                </div>
+                <span className="font-semibold text-xs font-mono text1 shrink-0">{pr.pr}</span>
               </div>
-              <ArrowUpRight size={18} aria-hidden="true" className="shrink-0 text2 transition-transform duration-200 group-hover:text-[var(--accent)] motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5" />
+              <h3 className="text-sm font-semibold text1 leading-snug group-hover:underline break-words line-clamp-2">
+                <span className={`inline-block align-middle mr-2 mb-0.5 text-[9px] px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-wider ${getLabelStyle(pr.label)}`}>
+                  {pr.label}
+                </span>
+                {pr.title}
+              </h3>
             </div>
-            <h3 className="text-base font-semibold leading-snug text1 [overflow-wrap:anywhere] group-hover:text-[var(--accent)]">
-              {pr.title}
-            </h3>
-            <p className="mt-2 mb-5 text-sm leading-6 text2">
-              {pr.impact}
-            </p>
-            <div className="mt-auto flex flex-wrap items-center gap-2">
-              <span className={`rounded-md px-2 py-1 text-[11px] font-semibold ${getLabelStyle(pr.label)}`}>
-                {pr.label}
-              </span>
-              {pr.featured && (
-                <span className="text-xs font-medium text-[var(--accent)]">Merged</span>
-              )}
-              <span className="ml-auto font-mono text-xs text2">{pr.pr}</span>
+            <div className="flex justify-between items-end mt-1.5 gap-3">
+              <p className="text-xs text2 italic leading-relaxed">
+                {pr.impact}
+              </p>
+              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:rotate-45 transition ease-in-out shrink-0 mb-0.5" />
             </div>
           </Link>
         ))}
       </div>
       <div className="w-full border-t">
-        <div className="innerContainer flex items-center justify-end px-4 py-3 sm:px-5">
-          <Link
-            href={"https://github.com/search?q=is:pr+author:satwiksps+is:merged+is:public&type=pullrequests"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex min-h-11 items-center gap-2 rounded-md px-2 text-sm font-medium text1 underline decoration-[var(--accent)] underline-offset-4 transition-colors duration-200 hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-          >
-            View all contributions
-            <ArrowUpRight size={16} aria-hidden="true" />
-          </Link>
+        <div className="innerContainer h-5 flex items-center justify-end px-4 py-4 mb-2">
+          <h5 className="text-sm font2 tracking-tighter">
+            <Link
+              href={"https://github.com/search?q=is:pr+author:satwiksps+is:merged+is:public&type=pullrequests"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text1 underline flex items-center gap-1 transition-colors duration-200 hover:!text-red-400 dark:hover:!text-zinc-300"
+            >
+              View all contributions
+              <ArrowUpRight size={14} />
+            </Link>
+          </h5>
         </div>
       </div>
     </div>
