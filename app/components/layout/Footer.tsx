@@ -20,8 +20,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full border-b">
-      <div className="innerContainer min-h-52 flex flex-col gap-8 md:flex-row justify-between md:items-end p-5 py-8 sm:px-8">
+    <footer className="w-full h-[30vh] border-b">
+      <div className="innerContainer h-full flex flex-col md:flex-row justify-between md:items-end p-4 py-8 md:pt-4">
 
         {/* rotating texts — top on mobile, right-bottom on desktop */}
         <div className="flex flex-col items-center md:items-end justify-between md:h-full w-full md:w-1/2 md:pt-4 md:order-2">
@@ -33,9 +33,9 @@ export default function Footer() {
 
         {/* footer links — bottom on mobile, left-bottom on desktop */}
         <div className="flex flex-col items-center md:items-start md:order-1">
-          <a href="https://github.com/satwiksps" className="text-xl font2 text2 underline hover:text-[var(--accent)] transition">Satwik Sai Prakash Sahoo</a>
-          <a href="https://github.com/satwiksps" className="hover:text-[var(--accent)] transition text-sm font1 tracking-tight text2">Github</a>
-          <a href="https://www.linkedin.com/in/satwiksps/" className="hover:text-[var(--accent)] transition text-sm font1 tracking-tight text2">Linkedin</a>
+          <a href="https://github.com/satwiksps" className="text-xl font2 text2 underline hover:!text-zinc-700 transition">Satwik Sai Prakash Sahoo</a>
+          <a href="https://github.com/satwiksps" className="hover:!text-zinc-700 transition text-sm font1 tracking-tight text2">Github</a>
+          <a href="https://www.linkedin.com/in/satwiksps/" className="hover:!text-zinc-700 transition text-sm font1 tracking-tight text2">Linkedin</a>
         </div>
 
       </div>

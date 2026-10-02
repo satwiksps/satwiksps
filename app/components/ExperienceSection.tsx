@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 
 const experiences = [
   {
@@ -44,57 +43,50 @@ const experiences = [
 
 export default function ExperienceSection() {
   return (
-    <div className="innerContainer px-5 font2 sm:px-8">
-      {experiences.map((experience) => (
-        <article
-          key={experience.company}
-          className="border-b py-6 last:border-b-0 sm:py-8"
-        >
-          <div className="flex items-start gap-3 sm:gap-4">
-            <Image
-              src={experience.image}
-              alt=""
-              width={42}
-              height={42}
-              className="shrink-0 rounded-xl border bg-white p-1.5"
-            />
-            <div className="min-w-0 flex-1">
-              <h3 className="text1 text-base font-semibold leading-snug tracking-tight sm:text-lg">
+    <div className="innerContainer h-full px-4 text-[15px]">
+      <div className="flex flex-col gap-6 font1 tracking-tighter py-4 text1">
+        {experiences.map((experience) => (
+          <div key={experience.company} className="flex flex-row gap-4 sm:gap-6 items-start">
+            <div className="mt-1 flex-shrink-0">
+              <Image
+                src={experience.image}
+                alt={`${experience.company} Logo`}
+                width={40}
+                height={40}
+                className="rounded-md bg-white p-1"
+              />
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg text1">
                 {experience.company}
               </h3>
-              <p className="text2 mt-1 text-sm leading-relaxed">
+              <p className="text-sm font-medium text2">
                 {experience.role}
-              </p>
-              <div className="text2 mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs leading-relaxed">
-                <span>{experience.period}</span>
                 {experience.link && (
-                  <a
-                    href={experience.link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${experience.company}: ${experience.link.label} (opens in a new tab)`}
-                    className="group inline-flex min-h-8 items-center gap-1 font-medium text-[var(--accent)] underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-                  >
-                    {experience.link.label}
-                    <ArrowUpRight
-                      size={13}
-                      aria-hidden="true"
-                      className="motion-safe:transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
-                    />
-                  </a>
+                  <>
+                    {" | "}
+                    <a
+                      href={experience.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${experience.company}: ${experience.link.label} (opens in a new tab)`}
+                      className="text2 underline underline-offset-2"
+                    >
+                      {experience.link.label}
+                    </a>
+                  </>
                 )}
-              </div>
+              </p>
+              <p className="text-xs text-zinc-500 italic mb-2">{experience.period}</p>
+              <ul className="list-disc pl-5 flex flex-col gap-2 marker:text-[var(--text2)] text-[var(--text2)]">
+                {experience.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
             </div>
           </div>
-          <ul className="text2 mt-4 list-disc space-y-3 pl-4 text-[15px] leading-[1.75] marker:text-[var(--accent)] sm:ml-[58px] sm:pl-4">
-            {experience.bullets.map((bullet) => (
-              <li key={bullet} className="pl-1">
-                {bullet}
-              </li>
-            ))}
-          </ul>
-        </article>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

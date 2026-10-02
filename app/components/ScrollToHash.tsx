@@ -11,12 +11,11 @@ export default function ScrollToHash() {
     const hash = window.location.hash;
 
     if (hash) {
-      const el = document.getElementById(hash.slice(1));
+      const el = document.querySelector(hash);
       if (el) {
-        const timer = setTimeout(() => {
-          el.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
         }, 100); // wait for render
-        return () => clearTimeout(timer);
       }
     }
   }, [pathname, searchParams]);

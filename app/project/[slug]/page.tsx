@@ -18,19 +18,19 @@ export default async function ProjectPage({
 
   if (!project) {
     return (
-      <main id="main-content" className="p-10 text-center text2">
+      <div className="p-10 text-center text2">
         Project not found
-      </main>
+      </div>
     );
   }
 
   return (
-    <main id="main-content">
+    <div>
       <StripedBox />
 
       <div className="w-full border-b">
         <div className="innerContainer px-4 py-3 flex items-center justify-between">
-          
+
           <Link
             href="/#projects" scroll={false}
             className="flex gap-2 items-center text2 hover:!text-zinc-600 hover:underline"
@@ -66,7 +66,7 @@ export default async function ProjectPage({
       <Heading name={project.heading} />
 
       <div className="w-full border-b">
-        <div className="innerContainer px-4 py-6 text2 text-[1.05rem] font2 tracking-tight leading-[1.65] break-words">
+        <div className="innerContainer px-4 py-6 text-zinc-600 text-[1.05rem] font2 tracking-tight leading-[1.55] break-words">
 
           <h4 className="pb-6">
             {project.subheading}
@@ -139,6 +139,6 @@ export default async function ProjectPage({
       </div>
 
       <Footer />
-    </main>
+    </div>
   );
 }
