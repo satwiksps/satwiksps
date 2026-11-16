@@ -1,8 +1,54 @@
 import Link from "next/link";
 import { GitPullRequest, ArrowUpRight } from "lucide-react";
 
-export default function OpenSourceSection() {
+const mergedPullRequestsQuery = "is:pr author:satwiksps is:merged is:public";
+const contributionsSearch = new URLSearchParams({ q: mergedPullRequestsQuery, type: "pullrequests" });
+
+async function getMergedContributionCount() {
+  const params = new URLSearchParams({ q: mergedPullRequestsQuery, per_page: "1" });
+
+  try {
+    const response = await fetch(`https://api.github.com/search/issues?${params}`, {
+      headers: { Accept: "application/vnd.github+json" },
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(3500),
+    });
+
+    if (!response.ok) return null;
+
+    const { total_count, incomplete_results } = await response.json();
+    return incomplete_results === false && Number.isSafeInteger(total_count) && total_count >= 0
+      ? total_count as number
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+export default async function OpenSourceSection() {
+  const mergedCount = await getMergedContributionCount();
+  const contributionLabel = mergedCount === null
+    ? "View all contributions"
+    : `View all ${mergedCount.toLocaleString("en")} contributions`;
+
+  // Interleave repositories so matching entries have space between them.
   const prs = [
+    {
+      org: "UrumiAI/otta.sh",
+      pr: "#523",
+      link: "https://github.com/UrumiAI/otta.sh/pull/523",
+      title: "Guard cron type compatibility",
+      label: "Type safety",
+      impact: "Exported the host cron type and added compile-time checks for the plugin’s cron interface.",
+    },
+    {
+      org: "sbi-dev/sbi",
+      pr: "#1749",
+      link: "https://github.com/sbi-dev/sbi/pull/1749",
+      title: "Fix memory bloat in multi-round inference",
+      label: "bug",
+      impact: "Resolved OOM issues during long simulations"
+    },
     {
       org: "podman-container-tools/podman",
       pr: "#29290",
@@ -12,20 +58,12 @@ export default function OpenSourceSection() {
       impact: "Re-enabled rootless farm tests after the CI migration, adding workflow filters, API socket setup, and portable home-directory handling.",
     },
     {
-      org: "podman-container-tools/podman",
-      pr: "#29289",
-      link: "https://github.com/podman-container-tools/podman/pull/29289",
-      title: "Fixed OpenAPI model collisions",
-      label: "API tooling",
-      impact: "Replaced deprecated Swagger aliases and disambiguated Go model names, resolving nine OpenAPI generation warnings.",
-    },
-    {
-      org: "podman-container-tools/podman",
-      pr: "#29297",
-      link: "https://github.com/podman-container-tools/podman/pull/29297",
-      title: "Stabilized cgroup integration tests",
-      label: "testing",
-      impact: "Fixed intermittent cgroups=split test failures with explicit systemd delegation so child cgroups receive the required controllers.",
+      org: "aeon-toolkit/aeon",
+      pr: "#3115",
+      link: "https://github.com/aeon-toolkit/aeon/pull/3115",
+      title: "Add exogenous variable support to ARIMA",
+      label: "feature",
+      impact: "Enabled multidimensional forecasting models natively"
     },
     {
       org: "flatcar/baselayout",
@@ -37,14 +75,6 @@ export default function OpenSourceSection() {
     },
     {
       org: "sbi-dev/sbi",
-      pr: "#1749",
-      link: "https://github.com/sbi-dev/sbi/pull/1749",
-      title: "Fix memory bloat in multi-round inference",
-      label: "bug",
-      impact: "Resolved OOM issues during long simulations"
-    },
-    {
-      org: "sbi-dev/sbi",
       pr: "#1705",
       link: "https://github.com/sbi-dev/sbi/pull/1705",
       title: "Add max_sampling_time support to rejection samplers",
@@ -52,12 +82,12 @@ export default function OpenSourceSection() {
       impact: "Prevented infinite loops during rare event sampling"
     },
     {
-      org: "aeon-toolkit/aeon",
-      pr: "#3115",
-      link: "https://github.com/aeon-toolkit/aeon/pull/3115",
-      title: "Add exogenous variable support to ARIMA",
-      label: "feature",
-      impact: "Enabled multidimensional forecasting models natively"
+      org: "podman-container-tools/podman",
+      pr: "#29289",
+      link: "https://github.com/podman-container-tools/podman/pull/29289",
+      title: "Fixed OpenAPI model collisions",
+      label: "API tooling",
+      impact: "Replaced deprecated Swagger aliases and disambiguated Go model names, resolving nine OpenAPI generation warnings.",
     },
     {
       org: "sbi-dev/sbi",
@@ -68,12 +98,28 @@ export default function OpenSourceSection() {
       impact: "Fixed critical crash on multi-GPU setups"
     },
     {
+      org: "aeon-toolkit/aeon",
+      pr: "#3116",
+      link: "https://github.com/aeon-toolkit/aeon/pull/3116",
+      title: "Fix zero-distance instability in Hidalgo",
+      label: "bug",
+      impact: "Resolved division-by-zero numerical instability"
+    },
+    {
       org: "sbi-dev/sbi",
       pr: "#1791",
       link: "https://github.com/sbi-dev/sbi/pull/1791",
       title: "Support shape broadcasting in density estimators",
       label: "feature",
       impact: "Allowed flexible batched tensor processing natively"
+    },
+    {
+      org: "podman-container-tools/podman",
+      pr: "#29297",
+      link: "https://github.com/podman-container-tools/podman/pull/29297",
+      title: "Stabilized cgroup integration tests",
+      label: "testing",
+      impact: "Fixed intermittent cgroups=split test failures with explicit systemd delegation so child cgroups receive the required controllers.",
     },
     {
       org: "sbi-dev/sbi",
@@ -83,79 +129,33 @@ export default function OpenSourceSection() {
       label: "refactor",
       impact: "Standardized API and decoupled initialization logic"
     },
-    {
-      org: "aeon-toolkit/aeon",
-      pr: "#3116",
-      link: "https://github.com/aeon-toolkit/aeon/pull/3116",
-      title: "Fix zero-distance instability in Hidalgo",
-      label: "bug",
-      impact: "Resolved division-by-zero numerical instability"
-    }
   ];
 
-  const getLabelStyle = (label: string) => {
-    switch (label) {
-      case "bug":
-        return "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20";
-      case "feature":
-        return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20";
-      case "refactor":
-        return "bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20";
-      default:
-        return "bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 border border-zinc-500/20";
-    }
-  };
-
   return (
-    <div className="w-full">
-      <div className="innerContainer grid grid-cols-1 md:grid-cols-3">
-        {prs.map((pr, idx) => (
-          <Link
-            href={pr.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            key={idx}
-            className={`group flex flex-col justify-between p-4 sm:p-5 min-h-[6.5rem] hover-bg2 transition ease-in border-b md:border-r [&:nth-child(3n)]:md:border-r-0 [&:nth-last-child(-n+3)]:md:border-b-0 last:border-b-0`}
-          >
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between gap-2 mb-1">
-                <div className="flex items-center gap-1.5 text-xs font-mono text2 min-w-0">
-                  <GitPullRequest size={14} className="shrink-0 text-zinc-400" />
-                  <span className="truncate">{pr.org}</span>
-                </div>
-                <span className="font-semibold text-xs font-mono text1 shrink-0">{pr.pr}</span>
-              </div>
-              <h3 className="text-sm font-semibold text1 leading-snug group-hover:underline break-words line-clamp-2">
-                <span className={`inline-block align-middle mr-2 mb-0.5 text-[9px] px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-wider ${getLabelStyle(pr.label)}`}>
-                  {pr.label}
-                </span>
-                {pr.title}
-              </h3>
-            </div>
-            <div className="flex justify-between items-end mt-1.5 gap-3">
-              <p className="text-xs text2 italic leading-relaxed">
-                {pr.impact}
+    <>
+      <ul className="content-grid contribution-grid">
+        {prs.map(({ org, pr, link, title, label, impact }) => (
+          <li key={link}>
+            <Link href={link} target="_blank" rel="noopener noreferrer" className="content-card content-card-body contribution-card">
+              <p className="item-meta contribution-repo">
+                <GitPullRequest size={14} aria-hidden="true" />
+                <span>{org}</span>
+                <span className="contribution-number">{pr}</span>
               </p>
-              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:rotate-45 transition ease-in-out shrink-0 mb-0.5" />
-            </div>
-          </Link>
-        ))}
-      </div>
-      <div className="w-full border-t">
-        <div className="innerContainer h-5 flex items-center justify-end px-4 py-4 mb-2">
-          <h5 className="text-sm font2 tracking-tighter">
-            <Link
-              href={"https://github.com/search?q=is:pr+author:satwiksps+is:merged+is:public&type=pullrequests"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text1 underline flex items-center gap-1 transition-colors duration-200 hover:!text-red-400 dark:hover:!text-zinc-300"
-            >
-              View all contributions
-              <ArrowUpRight size={14} />
+              <h3 className="item-title">{title}</h3>
+              <p className="contribution-impact">{impact} <span className="item-meta">· {label}</span></p>
             </Link>
-          </h5>
-        </div>
-      </div>
-    </div>
+          </li>
+        ))}
+      </ul>
+      <a
+        href={`https://github.com/search?${contributionsSearch}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="section-action"
+      >
+        {contributionLabel} <ArrowUpRight size={16} aria-hidden="true" />
+      </a>
+    </>
   );
 }

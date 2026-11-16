@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { siteUrl } from './site'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       disallow: '',
     },
-    sitemap: 'https://satwiksps.xyz/sitemap.xml',
+    sitemap: `${siteUrl}/sitemap.xml`,
   }
 }

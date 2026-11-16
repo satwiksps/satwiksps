@@ -3,28 +3,24 @@ import { useEffect, useState } from "react";
 
 type TextProps = {
   texts: string[];
-  align?: "left" | "center" | "right";
 };
 
-export default function RotatingText({ texts, align = "left" }: TextProps) {
+export default function RotatingText({ texts }: TextProps) {
   const [index, setIndex] = useState(0);
+  const count = texts.length;
 
   useEffect(() => {
+    if (count < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % texts.length);
+      setIndex((prev) => (prev + 1) % count);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, []);
-
-  const alignClass = {
-    left: "justify-start text-left",
-    center: "justify-center text-center",
-    right: "justify-end text-right",
-  }[align];
+  }, [count]);
 
   return (
-    <div className={`relative h-8 overflow-hidden text2 font-medium w-full ${alignClass}`}>
+    <div className="relative h-8 overflow-hidden text2 font-medium w-full text-left">
       <div
         className="transition-transform duration-700 ease-out"
         style={{
@@ -32,7 +28,7 @@ export default function RotatingText({ texts, align = "left" }: TextProps) {
         }}
       >
         {texts.map((text, i) => (
-          <div key={i} className={`h-8 flex items-center ${alignClass}`}>
+          <div key={text} aria-hidden={i !== index} className="h-8 flex items-center">
             {text}
           </div>
         ))}

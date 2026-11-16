@@ -1,6 +1,5 @@
 import Link from "next/link";
-import ProjectLines from "./ProjectLines";
-import { ArrowUpRight, Calendar, Clock } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function BlogsSection() {
   const arr = [
@@ -22,94 +21,23 @@ export default function BlogsSection() {
     }
   ];
 
-  const getTagStyle = (tag: string) => {
-    switch (tag.toLowerCase()) {
-      case "opensource":
-        return { color: "#10b981" }; // emerald-500
-      case "github":
-        return { color: "#8b5cf6" }; // purple-500
-      case "google":
-        return { color: "#3b82f6" }; // blue-500
-      case "gsoc":
-        return { color: "#f59e0b" }; // amber-500
-      case "python":
-        return { color: "#eab308" }; // yellow-500
-      case "ai":
-        return { color: "#f43f5e" }; // rose-500
-      default:
-        return { color: "var(--text1)" }; // fallback to main text color
-    }
-  };
-
   return (
-    <div className="w-full border-b">
-      <div className="innerContainer">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
-          {arr.map((blog, idx) => (
-            <div key={idx} className={`p-4 sm:p-6 ${idx === 0 ? "sm:border-r" : ""} hover-bg2 transition ease-in cursor-pointer`}>
-              <Link
-                href={blog.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-full flex flex-col"
-              >
-                <div className="flex items-center gap-3 text-zinc-500 text-sm mb-4 font-mono">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar size={15} />
-                    <span>{blog.date}</span>
-                  </div>
-                  <span>•</span>
-                  <div className="flex items-center gap-1.5">
-                    <Clock size={15} />
-                    <span>{blog.readTime}</span>
-                  </div>
-                </div>
-
-                <h2 className="text-xl md:text-2xl font-bold text1 mb-4 leading-snug group-hover:underline">
-                  {blog.heading}
-                </h2>
-
-                <p className="font-mono text-zinc-600 dark:text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
-                  {blog.summary}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {blog.tags.map(tag => (
-                    <span
-                      key={tag}
-                      className="bg2 border border-[var(--border)] rounded-full px-3 py-1 text-xs font-mono font-medium shadow-sm"
-                      style={getTagStyle(tag)}
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="w-full border-b">
-        <div className="innerContainer h-5 relative">
-          <div className="pointer-events-none absolute inset-0 grid grid-cols-1 sm:grid-cols-2 gap-0">
-            <div className="sm:border-r border-edge"></div>
-            <div></div>
-          </div>
-        </div>
-      </div>
-      <div className="w-full border-b">
-        <div className="innerContainer h-5 flex items-center justify-end px-4 py-3 pb-8">
-          <h5 className="text-sm font2 tracking-tighter">
-            <Link
-              href={"https://dev.to/satwiksps"}
-              className="text1 underline flex items-center gap-1 transition-colors duration-200 hover:!text-red-400 dark:hover:!text-zinc-300"
-            >
-              Read more blogs
-              <ArrowUpRight size={14} />
+    <>
+      <ul className="content-grid">
+        {arr.map((blog) => (
+          <li key={blog.link}>
+            <Link href={blog.link} target="_blank" rel="noopener noreferrer" className="content-card content-card-body">
+              <p className="item-meta"><time dateTime={blog.date}>{blog.date}</time> · {blog.readTime}</p>
+              <h3 className="item-title">{blog.heading}</h3>
+              <p>{blog.summary}</p>
+              <p className="tag-list">{blog.tags.map((tag) => <span key={tag}>#{tag}</span>)}</p>
             </Link>
-          </h5>
-        </div>
-      </div>
-    </div>
+          </li>
+        ))}
+      </ul>
+      <a href="https://dev.to/satwiksps" className="section-action">
+        Read more blogs <ArrowUpRight size={16} aria-hidden="true" />
+      </a>
+    </>
   );
 }

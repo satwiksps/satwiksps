@@ -3,15 +3,15 @@ const achievements = [
     description: (
       <>
         Selected for <strong className="font-medium text1">Amazon ML Summer School</strong> among top 3,000 of
-        134,000+ applicants through a rigorous coding assessment.
+        134,000+ applicants (top 2.2%) through a rigorous coding assessment.
       </>
     ),
   },
   {
     description: (
       <>
-        Contributed <strong className="font-medium text1">85+ merged pull requests</strong> to major open-source
-        repositories on GitHub including Podman, Flatcar etc.
+        Contributed <strong className="font-medium text1">125+ merged PRs</strong> to major open-source
+        repositories on GitHub with 1,000+ stars
       </>
     ),
     link: {
@@ -71,30 +71,26 @@ const achievements = [
 
 export default function AccomplishmentsSection() {
   return (
-    <div className="innerContainer h-full px-4 text-[15px]">
-      <div className="flex flex-col gap-4 font1 tracking-tighter py-4 text1">
-        <ul className="list-disc pl-5 flex flex-col gap-4 md:gap-3 marker:text-[var(--text2)] text-[var(--text2)]">
-          {achievements.map(({ description, link }, index) => (
-            <li key={index}>
-              {description}
-              {link && (
-                <>
-                  {" | "}
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${link.name} (opens in a new tab)`}
-                    className="text2 underline underline-offset-2"
-                  >
-                    {link.label}
-                  </a>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <ul className="bullet-list accomplishments-list">
+      {achievements.map(({ description, link }, index) => (
+        <li key={index}>
+          {description}
+          {link && (
+            <>
+              {" · "}
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.name}
+                className="accent-link"
+              >
+                {link.label}
+              </a>
+            </>
+          )}
+        </li>
+      ))}
+    </ul>
   );
 }

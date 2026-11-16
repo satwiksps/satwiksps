@@ -1,83 +1,34 @@
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Mars,
-  Globe,
-  FileText,
-} from "lucide-react";
-import IconBox from "./ui/IconBox";
-import CopyButton from "./ui/CopyButton";
-import TimeClock from "./ui/Clock";
+import { contactLinks } from "../data/contact";
+
+const contactGrid = [
+  contactLinks.email,
+  contactLinks.leetCode,
+  contactLinks.github,
+  contactLinks.resume,
+  contactLinks.linkedIn,
+  contactLinks.codeforces,
+  contactLinks.kaggle,
+  contactLinks.x,
+];
 
 export default function InfoBox() {
   return (
-    <>
-      <div className="innerContainer min-h-[25vh] p-4 py-6 font1 tracking-tighter grid grid-cols-1 sm:grid-cols-2">
-        <div className="flex flex-col gap-2 justify-center">
-          <div className="flex items-center gap-2 group">
-            <IconBox>
-              <Mail className="size-3.5" />
-            </IconBox>
+    <ul className="contact-list">
+      {contactGrid.map(({ label, href }) => {
+        const isExternal = href.startsWith("https://");
+        return (
+          <li key={href}>
             <a
-              href="mailto:sahoospsatwik@gmail.com?subject=Let's connect&body=Hi Satwik,"
-              className="hover:underline"
+              className="accent-link"
+              href={href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
             >
-              sahoospsatwik@gmail.com
+              {label}
             </a>
-            <CopyButton text="sahoospsatwik@gmail.com" />
-          </div>
-
-
-          <div className="flex items-center gap-2">
-            <IconBox>
-              <MapPin className="size-3.5" />
-            </IconBox>
-            <a
-              href="#"
-              className="hover:underline"
-            >
-              Bhubaneswar, India
-            </a>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <IconBox>
-              <Clock className="size-3.5" />
-            </IconBox>
-            <div className="hover:underline">
-              <TimeClock />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2 justify-center md:items-start mt-4 md:mt-0">
-          <div className="flex items-center gap-2 relative">
-            <IconBox>
-              <FileText className="size-3.5" />
-            </IconBox>
-            <a href="https://resumelink.co/satwiksps" target="_blank" rel="noopener noreferrer" className="hover:underline">
-              Resume
-            </a>
-          </div>
-          <div className="flex items-center gap-2">
-            <IconBox>
-              <Mars className="size-3.5" />
-            </IconBox>
-            <h3>He/him</h3>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <IconBox>
-              <Globe className="size-3.5" />
-            </IconBox>
-            <a href="https://www.satwiksps.site" target="_blank" rel="noopener noreferrer" className="hover:underline">
-              satwiksps.site
-            </a>
-          </div>
-        </div>
-      </div>
-    </>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

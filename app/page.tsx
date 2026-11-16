@@ -1,133 +1,81 @@
+import { Suspense, type ReactNode } from "react";
 import HeroBanner from "./components/HeroBanner";
 import HeroHeading from "./components/HeroHeading";
 import InfoBox from "./components/InfoBox";
-import SocialLinks from "./components/SocialLinks";
-import StripedBox from "./components/StripedBox";
 import ExperienceSection from "./components/ExperienceSection";
-import Heading from "./components/layout/Heading";
 import StackBox from "./components/StackBox";
 import ProjectsSection from "./components/ProjectsSection";
-import EducationSection from "./components/EducationSetion";
+import EducationSection from "./components/EducationSection";
 import BlogsSection from "./components/BlogsSection";
 import PublicationsSection from "./components/PublicationsSection";
 import AccomplishmentsSection from "./components/AccomplishmentsSection";
 import OpenSourceSection from "./components/OpenSourceSection";
 import Footer from "./components/layout/Footer";
 import ScrollToHash from "./components/ScrollToHash";
-import HiddenFooter from "./components/layout/HiddenFooter";
-import { Suspense } from "react";
+
+function PortfolioSection({ id, title, children }: {
+  id: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} aria-labelledby={`${id}-title`} className="portfolio-card section-card">
+      <h2 id={`${id}-title`}>{title}</h2>
+      {children}
+    </section>
+  );
+}
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg1 dark:bg-black">
+    <main className="portfolio-shell">
       <Suspense fallback={null}>
-      <ScrollToHash />
+        <ScrollToHash />
       </Suspense>
-      {/* HeroBanner */}
-      <div className="w-full border-b">
+
+      <section className="portfolio-card profile-card" aria-labelledby="profile-name">
         <HeroBanner />
-      </div>
-
-      {/* HeroHeading */}
-      <div className="w-full border-b">
         <HeroHeading />
-      </div>
+      </section>
 
-      <StripedBox />
-
-      {/* InfoBox */}
-      <div className="w-full border-b">
-        <InfoBox />
-      </div>
-
-      {/* Social Links */}
-      <div className="w-full h-fit border-b">
-        <SocialLinks />
-      </div>
-
-      <StripedBox />
-
-      {/* Experience Heading */}
-      <div id="experience" className="scroll-mt-20">
-        <Heading name="Experience" />
-      </div>
-
-      {/* Experience Section */}
-      <div className="w-full border-b">
+      <PortfolioSection id="experience" title="Experience">
         <ExperienceSection />
-      </div>
+      </PortfolioSection>
 
-      <StripedBox />
-
-      <Heading name="Stack" />
-
-      <div className="w-full border-b">
+      <PortfolioSection id="stack" title="Stack">
         <StackBox />
-      </div>
+      </PortfolioSection>
 
-      <StripedBox />
-
-      <div id="projects" className="scroll-mt-20">
+      <PortfolioSection id="projects" title="Projects">
         <ProjectsSection />
-      </div>
+      </PortfolioSection>
 
-      <StripedBox />
-
-      <div id="opensource" className="scroll-mt-20">
-        <Heading name="Open Source Contributions" />
-        <div className="w-full border-b">
-          <div className="innerContainer h-fit py-4 flex items-center justify-start px-4 font1 tracking-tighter text2 text-sm">
-            <h3>Some of my impactful contributions</h3>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full border-b">
+      <PortfolioSection id="opensource" title="Open Source Contributions">
+        <p className="section-intro">Some of my impactful contributions</p>
         <OpenSourceSection />
-      </div>
+      </PortfolioSection>
 
-      <StripedBox />
-
-      <div id="publications" className="scroll-mt-20">
-        <Heading name="Publications" />
-      </div>
-
-      <div className="w-full border-b">
+      <PortfolioSection id="publications" title="Publications">
         <PublicationsSection />
-      </div>
+      </PortfolioSection>
 
-      <StripedBox />
-
-      <div id="education" className="scroll-mt-20">
-        <Heading name="Education" />
-      </div>
-
-      <div className="w-full border-b h-fit">
+      <PortfolioSection id="education" title="Education">
         <EducationSection />
-      </div>
+      </PortfolioSection>
 
-      <StripedBox />
+      <PortfolioSection id="blogs" title="Blogs">
+        <BlogsSection />
+      </PortfolioSection>
 
-      <div id="blogs" className="scroll-mt-20">
-        <Heading name="Blogs" />
-      </div>
-
-      <BlogsSection />
-      <StripedBox />
-
-      <div id="accomplishments" className="scroll-mt-20">
-        <Heading name="Accomplishments" />
-      </div>
-
-      <div className="w-full border-b">
+      <PortfolioSection id="accomplishments" title="Accomplishments">
         <AccomplishmentsSection />
-      </div>
+      </PortfolioSection>
 
-      <StripedBox />
+      <PortfolioSection id="contact" title="Contact info">
+        <InfoBox />
+      </PortfolioSection>
 
       <Footer />
-      <HiddenFooter />
-
     </main>
   );
 }

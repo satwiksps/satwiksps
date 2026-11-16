@@ -4,94 +4,58 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Terminal } from "lucide-react";
+import { BriefcaseBusiness, FolderCode, House, Newspaper, ScrollText } from "lucide-react";
+import ThemeToggle from "../ThemeToggle";
+
+const links = [
+  { href: "/", label: "Home", icon: House },
+  { href: "/#experience", label: "Experience", icon: BriefcaseBusiness },
+  { href: "/#projects", route: "/project/", label: "Projects", icon: FolderCode },
+  { href: "/#publications", label: "Publications", icon: ScrollText },
+  { href: "/#blogs", label: "Blog", icon: Newspaper },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [hash, setHash] = useState("");
-  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const checkDark = () => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    };
-
-    checkDark();
-
-    // optional: watch for changes if you toggle theme dynamically
-    const observer = new MutationObserver(checkDark);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-    const update = () => setHash(window.location.hash);
-
-    update(); // initial
-
-    window.addEventListener("hashchange", update);
-    window.addEventListener("popstate", update);
-
+    const updateHash = () => setHash(window.location.hash);
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+    window.addEventListener("popstate", updateHash);
     return () => {
-      window.removeEventListener("hashchange", update);
-      window.removeEventListener("popstate", update);
-      observer.disconnect();
+      window.removeEventListener("hashchange", updateHash);
+      window.removeEventListener("popstate", updateHash);
     };
-  }, []);
-
-  const isHome = pathname === "/" && hash !== "#projects" && hash !== "#blogs";
-  const isProjects = pathname.startsWith("/project") || hash === "#projects";
-  const isBlogs = hash === "#blogs";
+  }, [pathname]);
 
   return (
-    <nav className="sticky top-2 z-50 h-12 w-full flex justify-center items-center bg1 border-y">
-      <div className="h-full max-w-3xl w-[95%] md:full flex justify-center items-center px-4 sm:px-8 border-x">
-        <div className="flex gap-4 sm:gap-8 overflow-x-auto whitespace-nowrap scrollbar-hide w-full justify-start sm:justify-center">
-          <Link
-            href="/"
-            onClick={() => setHash("")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${isHome ? "text1" : "text2 hover:text1"}`}>
-              Home
-            </h5>
-          </Link>
-
-          <Link
-            href="/#experience"
-            onClick={() => setHash("#experience")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${hash === "#experience" ? "text1" : "text2 hover:text1"}`}>
-              Experience
-            </h5>
-          </Link>
-
-          <Link
-            href="/#projects"
-            onClick={() => setHash("#projects")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${isProjects ? "text1" : "text2 hover:text1"}`}>
-              Projects
-            </h5>
-          </Link>
-
-          <Link
-            href="/#publications"
-            onClick={() => setHash("#publications")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${hash === "#publications" ? "text1" : "text2 hover:text1"}`}>
-              Publications
-            </h5>
-          </Link>
-
-          <Link
-            href="/#blogs"
-            onClick={() => setHash("#blogs")}
-          >
-            <h5 className={`text-[12px] sm:text-base ${isBlogs ? "text1" : "text2 hover:text1"}`}>
-              Blog
-            </h5>
-          </Link>
-        </div>
+    <header className="site-header">
+      <div className="site-header-inner">
+        <Link href="/" className="site-brand" aria-label="satwiksps home" onClick={() => setHash("")}>
+          <Image src="/images/satwiksps-avatar.png" alt="" width={32} height={32} unoptimized />
+          <span>satwiksps</span>
+        </Link>
+        <nav className="site-nav" aria-label="Main navigation">
+          {links.map(({ href, route, label, icon: Icon }) => {
+            const active = pathname === "/" ? `/${hash}` === href : route && pathname.startsWith(route);
+            return (
+              <Link
+                key={href}
+                href={href}
+                aria-current={active ? (hash && pathname === "/" ? "location" : "page") : undefined}
+                className="site-nav-link"
+                onClick={() => setHash(href.slice(1))}
+              >
+                <Icon size={20} strokeWidth={2} aria-hidden="true" />
+                {label}
+              </Link>
+            );
+          })}
+        </nav>
+        <ThemeToggle />
       </div>
-    </nav>
+    </header>
   );
 }

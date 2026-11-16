@@ -1,27 +1,15 @@
-export type Project = {
-    slug: string;
-    heading: string;
-    subheading: string;
-    image: string;
-    alt: string;
-}
-
-export type ProjectProps = {
-    projectData: Project[];
-}
+import type { StaticImageData } from "next/image";
 
 export type ProjectData = {
   slug: string;
   heading: string;
   subheading: string;
-  image: string;
+  summary: string;
+  image: StaticImageData;
   alt: string;
   description: string;
+  implementation: string[];
+  results: { value: string; label: string; context: string }[];
   tech: string[];
-  filler: string;
-  features: string[];
-  links: {
-    live: string;
-    github: string;
-  };
+  links: { label: string; href: string }[];
 };
