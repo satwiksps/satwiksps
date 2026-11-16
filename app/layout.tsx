@@ -13,7 +13,12 @@ const themeScript = `
 
 const description = "Satwik Sai Prakash Sahoo’s portfolio of software projects, open-source contributions, and research.";
 const avatar = "/images/satwiksps-avatar.png";
-const banner = "/images/profile-banner.png";
+const socialCard = {
+  url: "/images/portfolio-social-card.png",
+  width: 1200,
+  height: 630,
+  alt: "Satwik Sai Prakash Sahoo, Software Engineer. AI/ML, DevOps, and Open Source. satwiksps.site.",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -32,21 +37,14 @@ export const metadata: Metadata = {
     description,
     url: "/",
     siteName: "Satwik Sai Prakash Sahoo",
-    images: [
-      {
-        url: banner,
-        width: 2172,
-        height: 724,
-        alt: "design() build() automate() · @satwiksps",
-      },
-    ],
+    images: [socialCard],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Satwik Sai Prakash Sahoo",
     description,
-    images: [banner],
+    images: [socialCard],
   },
 };
 
