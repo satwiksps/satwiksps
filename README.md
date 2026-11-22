@@ -20,5 +20,3 @@ I'm **Satwik Sai Prakash Sahoo**. I build **ML infrastructure, coding-agent tool
 ▸ **[LeetCode Knight](https://leetcode.com/u/satwiksps/) · Rating 1876 · Top 4.99%**<br>
 ▸ **[Codeforces Specialist](https://codeforces.com/profile/satwiksps) · Maximum rating 1430**<br>
 ▸ **I write tech blogs too · [Read them here](https://dev.to/satwiksps)**
-
-<br clear="right" />
