@@ -1,7 +1,7 @@
 <table width="100%">
   <tr>
-    <td><strong>AI/ML Engineer · Open-source Developer</strong></td>
-    <td align="right"><a href="https://www.satwiksps.site">Portfolio</a> · <a href="https://www.linkedin.com/in/satwiksps/">LinkedIn</a> · <a href="https://x.com/satwiksps">X</a> · <a href="mailto:sahoospsatwik@gmail.com">Email</a></td>
+    <td><strong>Forward Deployed AI Engineer · Open-source Developer</strong></td>
+    <td align="right"><a href="https://www.satwiksps.site">Portfolio</a> · <a href="https://www.linkedin.com/in/satwiksps/">LinkedIn</a> · <a href="https://www.kaggle.com/satwiksps">Kaggle</a></td>
   </tr>
 </table>
 
